@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="navigation"><a href="./">Photo Gallery Index</a> &gt; {{ gallery.name }}</div>
+
+<!-- listing galleries-->
+
+<p class="bigthumbnails">
+{% for picture in pictures %}
+
+  <a {% if picture.orientation == "portrait" %}class="portrait"{% endif %} title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
+    <img height=80" width="53" alt="photo No. {{ picture.index }}" src="http://www.whyte.ninja/galleries/{{ picture.path }}" />
+  </a>
+
+{% endfor %}
+
+
+<div id="info">
+  <p>
+    <span class="key">Author: </span>
+    <span class="value">{{ gallery.author }}</span>
+  </p>
+</div>
+
+<p class="archives"> </p>
+
+{% endblock %}
