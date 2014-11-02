@@ -38,7 +38,12 @@ def read_photo_info(gallery, photo_path):
         orientation = 'portrait'
 
     return {
+        'hq': os.path.join(gallery, 'hq', photo_path),
+        'lq': os.path.join(gallery, 'lq', photo_path),
+        'thumb': os.path.join(gallery, 'thumbs', photo_path),
         'orientation': orientation,
+        'height': im.size[1],
+        'width': im.size[0],
     }
 
 
@@ -48,23 +53,40 @@ class GalleryView(FlaskView):
         top = PHOTO_ROOT
 
         if request.args.get('photo'):
-            idx = request.args.get('photo')
-            
-            rel_path = os.path.join(request.args['galerie'], 'thumbs', 'img-{}.jpg'.format(idx))
+            idx = int(request.args.get('photo'))
             prev = os.path.join(request.args['galerie'], 'thumbs', 'img-{}.jpg'.format(idx - 1))
             next = os.path.join(request.args['galerie'], 'thumbs', 'img-{}.jpg'.format(idx + 1))
-            thumb = os.path.join(top, rel_path)
-            
-            if os.path.isfile(thumb):
-                pass
-            info = read_info_file(os.path.join(top, request.args['galerie'], 'info.txt'))
-            context = {
-                'pictures': pictures,
-                'gallery': info,
-            }
+            rel_path = os.path.join(request.args['galerie'], 'thumbs', 'img-{}.jpg'.format(idx))
+            current = os.path.join(top, rel_path)
+
+            context = {}
+
+            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx - 1))
+            if info:
+                info.update({
+                    'index': idx - 1,
+                })
+                context['prev'] = info
+
+            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx + 1))
+            if info:
+                info.update({
+                    'index': idx + 1,
+                })
+                context['next'] = info
+
+            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx))
+            info.update({
+                'path': '',
+                'index': idx,
+            })
+            context['current'] = info
+            context['gallery'] = read_info_file(
+                os.path.join(top, request.args['galerie'], 'info.txt')
+            )
             #print(context)
 
-            return render_template('gallery_detail.html', **context)
+            return render_template('gallery_photo.html', **context)
 
         elif request.args.get('galerie'):
 

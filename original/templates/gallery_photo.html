@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="navigation">
+  <a href="./">Photo Gallery Index</a> &gt; <a href="?galerie={{ gallery.folder_name }}">{{ gallery.name }}</a> &gt; Photo {{ current.index }}
+</div>
+
+<!-- thumbroll -->
+
+{% set height = current.height // 3 %}
+{% set width = current.width // 3 %}
+
+<div id="image" style="height: {{ height + 10 }}px">
+  <img id="preview" height="{{ height }}" width="{{ width }}" alt="" src="http://www.whyte.ninja/galleries/{{ current.lq }}" />
+
+  {% if prev %}
+  <div class="prevthumb">
+    <a href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}">
+      {% if prev.orientation == "portrait" %}
+      <img height="80" width="53" src="http://www.whyte.ninja/galleries/{{ prev.thumb }}" alt="Previous"/>
+      {% else %}
+      <img height="53" width="80" src="http://www.whyte.ninja/galleries/{{ prev.thumb }}" alt="Previous"/>
+      {% endif %}
+      <br />
+      Previous
+    </a>
+  </div>
+  {% endif %}
+
+  {% if next %}
+  <div class="nextthumb">
+    <a href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}">
+      {% if next.orientation == "portrait" %}
+      <img height="80" width="53" src="http://www.whyte.ninja/galleries/{{ next.thumb }}" alt="Next"/>
+      {% else %}
+      <img height="53" width="80" src="http://www.whyte.ninja/galleries/{{ next.thumb }}" alt="Next"/>
+      {% endif %}
+      <br />
+      Next
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}
