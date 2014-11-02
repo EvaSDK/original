@@ -15,7 +15,7 @@ def read_info_file(path):
     """ Read gallery information file. """
 
     with io.open(path, encoding='utf-8') as info_fd:
-        info = dict([line.split('|')
+        info = dict([line.strip().split('|')
                      for line in info_fd.readlines()])
         info['date'] = datetime.datetime.strptime(info['date'].strip(),
                                                   '%Y-%m-%d').date()

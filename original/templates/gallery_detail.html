@@ -8,9 +8,15 @@
 <p class="bigthumbnails">
 {% for picture in pictures %}
 
-  <a {% if picture.orientation == "portrait" %}class="portrait"{% endif %} title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
-    <img height=80" width="53" alt="photo No. {{ picture.index }}" src="http://www.whyte.ninja/galleries/{{ picture.path }}" />
+  {% if picture.orientation == "portrait" %}
+  <a class="portrait" title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
+    <img height="80" width="53" alt="photo No. {{ picture.index }}" src="http://www.whyte.ninja/galleries/{{ picture.path }}" />
   </a>
+  {% else %}
+  <a title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
+    <img height="53" width="80" alt="photo No. {{ picture.index }}" src="http://www.whyte.ninja/galleries/{{ picture.path }}" />
+  </a>
+  {% endif %}
 
 {% endfor %}
 
