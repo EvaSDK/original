@@ -47,6 +47,29 @@ def read_photo_info(gallery, photo_path):
     }
 
 
+def list_thumbnails(gallery):
+    """ List thumbnails for `gallery`. """
+    pictures = []
+
+    idx = 0
+    while True:
+        idx = idx + 1
+        rel_path = os.path.join(request.args['galerie'], 'thumbs', 'img-{}.jpg'.format(idx))
+        thumb = os.path.join(PHOTO_ROOT, rel_path)
+
+        if os.path.isfile(thumb):
+            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx))
+            info.update({
+                'path': rel_path,
+                'index': idx,
+            })
+            pictures.append(info)
+        else:
+            break
+
+    return pictures
+
+
 class GalleryView(FlaskView):
 
     def index(self):
@@ -86,34 +109,18 @@ class GalleryView(FlaskView):
             )
             #print(context)
 
+            if request.args.get('show_thumbs') == 'yes':
+                context['thumbs'] = list_thumbnails(request.args['galerie'])
+
             return render_template('gallery_photo.html', **context)
 
         elif request.args.get('galerie'):
 
-            pictures = []
-
-            idx = 0
-            while True:
-                idx = idx + 1
-                rel_path = os.path.join(request.args['galerie'], 'thumbs', 'img-{}.jpg'.format(idx))
-                thumb = os.path.join(top, rel_path)
-                
-                if os.path.isfile(thumb):
-                    info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx))
-                    info.update({
-                        'path': rel_path,
-                        'index': idx,
-                    })
-                    pictures.append(info)
-                else:
-                    break
-
             info = read_info_file(os.path.join(top, request.args['galerie'], 'info.txt'))
             context = {
-                'pictures': pictures,
+                'pictures': list_thumbnails(request.args['galerie']),
                 'gallery': info,
             }
-            #print(context)
 
             return render_template('gallery_detail.html', **context)
 

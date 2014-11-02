@@ -6,6 +6,23 @@
 </div>
 
 <!-- thumbroll -->
+<div class="thumbroll">
+  {% if thumbs %}
+  <a id="minus" href="?galerie={{ gallery.folder_name }}&photo={{ current.index }}"></a> :
+  {% for thumb in thumbs %}
+  <a href="?galerie={{ gallery.folder_name }}&photo={{ thumb.index }}&show_thumbs=yes" title="Photo">
+    <img class="thumb" src="http://www.whyte.ninja/galleries/{{ thumb.path }}" alt="photo No. {{ thumb.index }}"
+    {%- if thumb.orientation == "portrait" %}
+    width="13" height="20"
+    {% else %}
+    width="20" height="13"
+    {% endif %} /></a>
+{% endfor %}
+{% else %}
+  <a id="plus" href="?galerie={{ gallery.folder_name }}&photo={{ current.index }}&show_thumbs=yes" title="Show Thumbnail Navigation"></a>
+{% endif %}
+</div>
+
 
 {% set height = current.height // 3 %}
 {% set width = current.width // 3 %}
