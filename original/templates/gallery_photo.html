@@ -59,4 +59,16 @@
   {% endif %}
 </div>
 
+<div class="navbuttons">
+  <div class="navbuttonsshell">
+    {%- if prev %}
+    <a id="previcon" href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}exif_style=&amp;show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="p">&lt; <span class="accesskey">P</span>revious</a>
+    {% endif %}
+    &nbsp;
+    {%- if next %}
+    <a id="nexticon" href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}&exif_style=&show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="n"><span class="accesskey">N</span>ext &gt;</a>
+    {% endif %}
+  </div>
+</div>
+
 {% endblock %}
