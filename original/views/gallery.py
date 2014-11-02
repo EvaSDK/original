@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import hashlib
 import io
 import os
+import random
 
 from flask import render_template, request
 from flask_classy import FlaskView
@@ -24,9 +26,11 @@ def read_info_file(path):
     return info
 
 
-def read_photo_info(gallery, photo_path):
+def read_photo_info(gallery, index):
     """ Read photo information. """
-    hires_path = os.path.join(PHOTO_ROOT, gallery, 'hq', photo_path)
+    hires_path = os.path.join(
+        PHOTO_ROOT, gallery, 'hq', 'img-{}.jpg'.format(index)
+    )
     if not os.path.exists(hires_path):
         return None
 
@@ -37,13 +41,20 @@ def read_photo_info(gallery, photo_path):
     else:
         orientation = 'portrait'
 
+    view_path = os.path.join(
+        PHOTO_ROOT, gallery, 'comments', 'log_{}.txt'.format(index)
+    )
+    with io.open(view_path, encoding='utf-8') as view_file:
+        views = view_file.read()
+
     return {
-        'hq': os.path.join(gallery, 'hq', photo_path),
-        'lq': os.path.join(gallery, 'lq', photo_path),
-        'thumb': os.path.join(gallery, 'thumbs', photo_path),
+        'hq': os.path.join(gallery, 'hq', 'img-{}.jpg'.format(index)),
+        'lq': os.path.join(gallery, 'lq', 'img-{}.jpg'.format(index)),
+        'thumb': os.path.join(gallery, 'thumbs', 'img-{}.jpg'.format(index)),
         'orientation': orientation,
         'height': im.size[1],
         'width': im.size[0],
+        'views': int(views),
     }
 
 
@@ -58,7 +69,7 @@ def list_thumbnails(gallery):
         thumb = os.path.join(PHOTO_ROOT, rel_path)
 
         if os.path.isfile(thumb):
-            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx))
+            info = read_photo_info(request.args['galerie'], idx)
             info.update({
                 'path': rel_path,
                 'index': idx,
@@ -84,21 +95,21 @@ class GalleryView(FlaskView):
 
             context = {}
 
-            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx - 1))
+            info = read_photo_info(request.args['galerie'], idx - 1)
             if info:
                 info.update({
                     'index': idx - 1,
                 })
                 context['prev'] = info
 
-            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx + 1))
+            info = read_photo_info(request.args['galerie'], idx + 1)
             if info:
                 info.update({
                     'index': idx + 1,
                 })
                 context['next'] = info
 
-            info = read_photo_info(request.args['galerie'], 'img-{}.jpg'.format(idx))
+            info = read_photo_info(request.args['galerie'], idx)
             info.update({
                 'path': '',
                 'index': idx,
@@ -111,6 +122,20 @@ class GalleryView(FlaskView):
 
             if request.args.get('show_thumbs') == 'yes':
                 context['thumbs'] = list_thumbnails(request.args['galerie'])
+
+            comment_path = os.path.join(
+                PHOTO_ROOT, request.args['galerie'], 'comments',
+                'user_{}.txt'.format(idx)
+            )
+            with io.open(comment_path, encoding='utf-8') as comment_file:
+                context['comments'] = comment_file.read()
+
+            code = str(random.randint(1000, 9999))
+            code_checksum = hashlib.md5(code).hexdigest()
+            context['antispam'] = {
+                'code': code,
+                'checksum': code_checksum,
+            }
 
             return render_template('gallery_photo.html', **context)
 

@@ -59,6 +59,66 @@
   {% endif %}
 </div>
 
+<div class="comment">
+  <span>Photo {{ current.index }}</span>
+  <div id="log">
+    This image has been viewed <strong>{{ current.views }}</strong> times.
+  </div>
+
+  <div id="mqhq">
+    <a href="http://www.whyte.ninja/galleries/{{ current.hq }}">HQ</a>
+  </div>
+
+  <div id="comment_block">
+    <div id="showhideform">
+      <strong>Post a Comment</strong>:
+      <span class="comment_toggle">
+        [&nbsp;
+        <a href="javascript:toggle_comment()">
+          <span id="showlink" style="">Show Form</span>
+          <span id="hidelink" style="display: none;">Hide Form</span></a>
+        &nbsp;]
+      </span>
+    </div>
+
+    <div id="comment_form" style="display: none;">
+      <form action="" method="post">
+        <div class="row">
+          <div class="label"><a title="Enter your name." href="#">Name:</a></div>
+          <div class="control"><input size="30" name="commentname" value="" type="text" /></div>
+        </div>
+        <div class="row">
+          <div class="label"><a title="Should the browser remember your name?" href="#">Remember Name:</a></div>
+          <div class="control"><input name="savecommentname" value="1" checked="checked" type="checkbox" /></div>
+        </div>
+        <div class="row"><div class="control">{{ antispam.code }}</div></div>
+        <div class="row">
+          <div class="label"></div>
+          <div class="control"><input name="commentkolacek" value="{{ antispam.checksum }}" type="hidden" /></div>
+        </div>
+        <div class="row">
+          <div class="label"><a title="Enter the number shown above." href="#">Retype PIN Above:</a></div>
+          <div class="control"><input size="30" name="commentspamcheck" value="" type="text" /></div>
+        </div>
+        <div class="row">
+          <div class="label"><a title="Allowed HTML tags: a,b,i,ul,li,blockquote,br." href="#">Comment :</a></div>
+          <div class="control"><textarea name="commentdata" cols="40" rows="10"></textarea></div>
+        </div>
+        <div class="row">
+          <div class="label"></div>
+          <div class="control"><input name="" value="Send" type="submit" /></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="user_comment">
+{% autoescape false %}
+{{ comments }}
+{% endautoescape %}
+</div>
+
 <div class="navbuttons">
   <div class="navbuttonsshell">
     {%- if prev %}
