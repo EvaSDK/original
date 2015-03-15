@@ -169,3 +169,28 @@ class GalleryView(FlaskView):
             context = {'galleries': galleries}
 
             return render_template('gallery_list.html', **context)
+
+    def post(self):
+
+        if request.args.get('photo'):
+            idx = int(request.args.get('photo'))
+            code = request.form['commentspamcheck']
+            code_checksum = hashlib.md5().hexdigest()
+
+            if code_checksum != request.form['commentkolacek']:
+                return render_template('comment_failure.html')
+
+            comment_path = os.path.join(
+                PHOTO_ROOT, request.args['galerie'], 'comments',
+                'user_{}.txt'.format(idx)
+            )
+            with io.open(comment_path, 'at', encoding='utf-8') as comment_file:
+                comment_file.write(u"""<div class="commententry">
+<div class="name">Comment from<em>{commentname}</em></div>
+<div class="commentdata">{commentdata}</div>
+</div>""".format(
+    commentname=request.form['commentname'],
+    commentdata=request.form['commentdata']
+))
+
+        return self.index()
