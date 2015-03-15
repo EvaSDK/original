@@ -144,6 +144,12 @@ class GalleryView(FlaskView):
                 'checksum': code_checksum,
             }
 
+            view_path = os.path.join(
+                PHOTO_ROOT, request.args['galerie'], 'comments', 'log_{}.txt'.format(idx)
+            )
+            with io.open(view_path, 'wt', encoding='utf-8') as view_file:
+                view_file.write(u'{0:d}'.format(info['views'] + 1))
+
             return render_template('gallery_photo.html', **context)
 
         elif request.args.get('galerie'):
