@@ -44,8 +44,14 @@ def read_photo_info(gallery, index):
     view_path = os.path.join(
         PHOTO_ROOT, gallery, 'comments', 'log_{}.txt'.format(index)
     )
-    with io.open(view_path, encoding='utf-8') as view_file:
-        views = view_file.read()
+    if os.path.exists(view_path):
+        with io.open(view_path, encoding='utf-8') as view_file:
+            views = view_file.read()
+            if views:
+                views = str(views)
+
+    if not views:
+        views = 0
 
     return {
         'hq': os.path.join(gallery, 'hq', 'img-{}.jpg'.format(index)),
