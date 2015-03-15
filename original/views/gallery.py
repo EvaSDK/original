@@ -28,13 +28,13 @@ def read_info_file(path):
 
 def read_photo_info(gallery, index):
     """ Read photo information. """
-    hires_path = os.path.join(
-        PHOTO_ROOT, gallery, 'hq', 'img-{}.jpg'.format(index)
+    lores_path = os.path.join(
+        PHOTO_ROOT, gallery, 'lq', 'img-{}.jpg'.format(index)
     )
-    if not os.path.exists(hires_path):
+    if not os.path.exists(lores_path):
         return None
 
-    im = Image.open(hires_path)
+    im = Image.open(lores_path)
 
     if im.size[0] > im.size[1]:
         orientation ='landscape'
