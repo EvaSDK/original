@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="navigation"><a href="./">Photo Gallery Index</a> &gt; {{ gallery.name }}</div>
+<div class="navigation"><a href="./">{% trans %}Photo Gallery Index{% endtrans %}</a> &gt; {{ gallery.name }}</div>
 
 <!-- listing galleries-->
 
@@ -23,7 +23,7 @@
 
 <div id="info">
   <p>
-    <span class="key">Author: </span>
+    <span class="key">{% trans %}Author: {% endtrans %}</span>
     <span class="value">{{ gallery.author }}</span>
   </p>
 </div>

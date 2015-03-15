@@ -2,15 +2,14 @@
 
 {% block content %}
 
-<div class="navigation"><a href="./">Photo Gallery Index</a></div>
+<div class="navigation"><a href="./">{% trans %}Photo Gallery Index{% endtrans %}</a></div>
 
 <!-- listing galleries-->
 
 {% for year, year_group in galleries|groupby('date.year')|sort(reverse=True) %}
-
 <div class="year"><h3>{{ year }}</h3>
  {% for month, list in year_group|groupby('date.month')|sort(reverse=True) %}
-  <div class="month"><h4>{{ month }}</h4>
+  <div class="month"><h4>{{ list[0].date|dateformat('MMMM')|capitalize }}</h4>
 
     {% for pellicule in list %}
     {% if 'restricted_user' in pellicule %}
@@ -18,17 +17,22 @@
     {% else %}
     <p>
     {% endif %}
-      <a href='?galerie={{ pellicule.folder_name }}'>{{ pellicule.name }}</a>
-      <span class="author">by {{ pellicule.author }}</span>
-      <span class="date">{{ pellicule.date }}</span>
+    {% trans
+         folder=pellicule.folder_name,
+         name=pellicule.name,
+         author=pellicule.author,
+         date=pellicule.date|dateformat
+      -%}
+      <a href='?galerie={{ folder }}'>{{ name }}</a>
+      <span class="author">by {{ author }}</span>
+      <span class="date">{{ date }}</span>
+    {%- endtrans %}
     </p>
     {% endfor %}
 
   </div>
   {% endfor %}
-
 </div>
-
 {% endfor %}
 
 {% endblock %}

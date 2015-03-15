@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="navigation">
-  <a href="./">Photo Gallery Index</a> &gt; <a href="?galerie={{ gallery.folder_name }}">{{ gallery.name }}</a> &gt; Photo {{ current.index }}
+  <a href="./">{% trans %}Photo Gallery Index{% endtrans %}</a> &gt; <a href="?galerie={{ gallery.folder_name }}">{{ gallery.name }}</a> &gt; Photo {{ current.index }}
 </div>
 
 <!-- thumbroll -->
@@ -58,7 +58,7 @@
 <div class="comment">
   <span>Photo {{ current.index }}</span>
   <div id="log">
-    This image has been viewed <strong>{{ current.views }}</strong> times.
+    {% trans views=current.views %}This image has been viewed <strong>{{ views }}</strong> times.{% endtrans %}
   </div>
 
   <div id="mqhq">
@@ -67,12 +67,12 @@
 
   <div id="comment_block">
     <div id="showhideform">
-      <strong>Post a Comment</strong>:
+      <strong>{% trans %}Post a Comment{% endtrans %}</strong>:
       <span class="comment_toggle">
         [&nbsp;
         <a href="javascript:toggle_comment()">
-          <span id="showlink" style="">Show Form</span>
-          <span id="hidelink" style="display: none;">Hide Form</span></a>
+          <span id="showlink" style="">{% trans %}Show Form{% endtrans %}</span>
+          <span id="hidelink" style="display: none;">{% trans %}Hide Form{% endtrans %}</span></a>
         &nbsp;]
       </span>
     </div>
@@ -80,11 +80,11 @@
     <div id="comment_form" style="display: none;">
       <form action="" method="post">
         <div class="row">
-          <div class="label"><a title="Enter your name." href="#">Name:</a></div>
+          <div class="label"><a title="Enter your name." href="#">{% trans %}Name:{% endtrans %}</a></div>
           <div class="control"><input size="30" name="commentname" value="" type="text" /></div>
         </div>
         <div class="row">
-          <div class="label"><a title="Should the browser remember your name?" href="#">Remember Name:</a></div>
+          <div class="label"><a title="Should the browser remember your name?" href="#">{% trans %}Remember Name:{% endtrans %}</a></div>
           <div class="control"><input name="savecommentname" value="1" checked="checked" type="checkbox" /></div>
         </div>
         <div class="row"><div class="control">{{ antispam.code }}</div></div>
@@ -93,16 +93,16 @@
           <div class="control"><input name="commentkolacek" value="{{ antispam.checksum }}" type="hidden" /></div>
         </div>
         <div class="row">
-          <div class="label"><a title="Enter the number shown above." href="#">Retype PIN Above:</a></div>
+          <div class="label"><a title="Enter the number shown above." href="#">{% trans %}Retype PIN Above:{% endtrans %}</a></div>
           <div class="control"><input size="30" name="commentspamcheck" value="" type="text" /></div>
         </div>
         <div class="row">
-          <div class="label"><a title="Allowed HTML tags: a,b,i,ul,li,blockquote,br." href="#">Comment :</a></div>
+          <div class="label"><a title="Allowed HTML tags: a,b,i,ul,li,blockquote,br." href="#">{% trans %}Comment :{% endtrans %}</a></div>
           <div class="control"><textarea name="commentdata" cols="40" rows="10"></textarea></div>
         </div>
         <div class="row">
           <div class="label"></div>
-          <div class="control"><input name="" value="Send" type="submit" /></div>
+          <div class="control"><input name="" value="{% trans %}Send{% endtrans %}" type="submit" /></div>
         </div>
       </form>
     </div>
@@ -120,11 +120,11 @@
 <div class="navbuttons">
   <div class="navbuttonsshell">
     {%- if prev %}
-    <a id="previcon" href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}exif_style=&amp;show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="p">&lt; <span class="accesskey">P</span>revious</a>
+    <a id="previcon" href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}exif_style=&amp;show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="p">&lt; {% trans %}<span class="accesskey">P</span>revious{% endtrans %}</a>
     {% endif %}
     &nbsp;
     {%- if next %}
-    <a id="nexticon" href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}&exif_style=&show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="n"><span class="accesskey">N</span>ext &gt;</a>
+    <a id="nexticon" href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}&exif_style=&show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="n">{% trans %}<span class="accesskey">N</span>ext{% endtrans %} &gt;</a>
     {% endif %}
   </div>
 </div>

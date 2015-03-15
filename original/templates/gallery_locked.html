@@ -9,7 +9,7 @@
   <script src="{{ url_for('static', filename='styles/ie7/ie7-standard.js') }}" type="text/javascript">
   </script>
   <![endif]-->
-  <title>Access Denied</title>
+  <title>{% trans %}Access Denied{% endtrans %}</title>
   <link rel="icon" href="{{ url_for('static', filename='stock_camera-16.png') }}" type="image/png" />
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/dark/dark.css') }}" title="dark" media="screen" />
@@ -20,9 +20,9 @@
 
   <body onload="checkForTheme()">
     <div class="error">
-      <h1>Access Denied</h1>
-      <p>Sorry, this gallery is restricted</p>
-      <p><a href="{{ url_for('GalleryView:index') }}">Return to index</a></p>
+      <h1>{% trans %}Access Denied{% endtrans %}</h1>
+      <p>{% trans %}Sorry, this gallery is restricted{% endtrans %}</p>
+      <p><a href="{{ url_for('GalleryView:index') }}">{% trans %}Return to index{% endtrans %}</a></p>
     </div>
   </body>
 </html>

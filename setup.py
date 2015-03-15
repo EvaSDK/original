@@ -29,6 +29,7 @@ setup(
     install_requires=[
         'pillow',
         'flask',
+        'flask_babel',
         'flask_classy',
     ],
     classifiers=[

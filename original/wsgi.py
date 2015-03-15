@@ -3,8 +3,10 @@
 """ Help running application. """
 
 from flask import Flask
+from flask.ext.babel import Babel
 
 app = Flask(__name__.split('.')[0])
+babel = Babel(app)
 
 from original.views.gallery import GalleryView
 
