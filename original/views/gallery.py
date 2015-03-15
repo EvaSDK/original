@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import base64
 import datetime
 import hashlib
 import io
@@ -155,6 +156,21 @@ class GalleryView(FlaskView):
         elif request.args.get('galerie'):
 
             info = read_info_file(os.path.join(top, request.args['galerie'], 'info.txt'))
+
+            if 'restricted_user' in info:
+                creds = base64.encodestring(
+                    '{restricted_user}:{restricted_password}'.format(**info)
+                )
+                creds = 'Basic ' + creds.strip()
+
+                if creds != request.headers.get('Authorization', ''):
+                    return (
+                        render_template('gallery_locked.html'),
+                        401,
+                        [('WWW-authenticate',
+                          'Basic Realm='+ request.args['galerie'])]
+                    )
+
             context = {
                 'pictures': list_thumbnails(request.args['galerie']),
                 'gallery': info,

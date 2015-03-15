@@ -1,5 +1,5 @@
 Achieve feature parity with original:
-* Implement restricted galleries.
+* i18n.
 
 * Refactor.
 * Unittest.
