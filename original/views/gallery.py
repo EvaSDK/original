@@ -127,8 +127,9 @@ class GalleryView(FlaskView):
                 PHOTO_ROOT, request.args['galerie'], 'comments',
                 'user_{}.txt'.format(idx)
             )
-            with io.open(comment_path, encoding='utf-8') as comment_file:
-                context['comments'] = comment_file.read()
+            if os.path.exists(comment_path):
+                with io.open(comment_path, encoding='utf-8') as comment_file:
+                    context['comments'] = comment_file.read()
 
             code = str(random.randint(1000, 9999))
             code_checksum = hashlib.md5(code).hexdigest()

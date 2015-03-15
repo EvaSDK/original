@@ -113,11 +113,13 @@
   </div>
 </div>
 
+{% if comments %}
 <div class="user_comment">
 {% autoescape false %}
 {{ comments }}
 {% endautoescape %}
 </div>
+{% endif %}
 
 <div class="navbuttons">
   <div class="navbuttonsshell">
