@@ -11,7 +11,7 @@
   <a id="minus" href="?galerie={{ gallery.folder_name }}&photo={{ current.index }}"></a> :
   {% for thumb in thumbs %}
   <a href="?galerie={{ gallery.folder_name }}&photo={{ thumb.index }}&show_thumbs=yes" title="Photo">
-    <img class="thumb" src="http://www.whyte.ninja/galleries/{{ thumb.path }}" alt="photo No. {{ thumb.index }}"
+    <img class="thumb" src="http://www.whyte.ninja/galleries/{{ thumb.thumb }}" alt="photo No. {{ thumb.index }}"
     {%- if thumb.orientation == "portrait" %}
     width="13" height="20"
     {% else %}
