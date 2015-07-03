@@ -111,7 +111,6 @@ class Photo(object):
             'height': im.size[1],
             'width': im.size[0],
             'views': int(views),
-            'path': self.compute_path('thumbs'),
             'index': self.index,
         }
 
