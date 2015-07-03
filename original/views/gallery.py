@@ -16,8 +16,8 @@ class GalleryView(FlaskView):
             index = int(request.args.get('photo'))
             gallery = Gallery(request.args['galerie'])
             current = Photo(gallery, index)
-            code = str(random.randint(1000, 9999))
-            code_checksum = hashlib.md5(code).hexdigest()
+            code = u'{}'.format(random.randint(1000, 9999))
+            code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
 
             context = {
                 'gallery': gallery.get_info(),
