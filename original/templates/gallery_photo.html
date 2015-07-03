@@ -23,12 +23,8 @@
 {% endif %}
 </div>
 
-
-{% set height = current.height // 3 %}
-{% set width = current.width // 3 %}
-
-<div id="image" style="height: {{ height + 10 }}px">
-  <img id="preview" height="{{ height }}" width="{{ width }}" alt="" src="http://www.whyte.ninja/galleries/{{ current.lq }}" />
+<div id="image" style="height: {{ current.height + 10 }}px">
+  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="http://www.whyte.ninja/galleries/{{ current.lq }}" />
 
   {% if prev %}
   <div class="prevthumb">
