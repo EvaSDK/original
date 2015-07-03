@@ -61,9 +61,16 @@
     This image has been viewed <strong>{{ current.views }}</strong> times.
   </div>
 
+  {% if current.mq or current.hq %}
   <div id="mqhq">
+    {% if current.mq %}
+    <a href="http://www.whyte.ninja/galleries/{{ current.mq }}">MQ</a>
+    {% endif %}
+    {% if current.hq %}
     <a href="http://www.whyte.ninja/galleries/{{ current.hq }}">HQ</a>
+    {% endif %}
   </div>
+  {% endif %}
 
   <div id="comment_block">
     <div id="showhideform">
