@@ -25,10 +25,9 @@ class Gallery(object):
     def credentials(self):
         info = self.get_info()
         if 'restricted_user' in info:
-            creds = base64.encodestring(
-                '{restricted_user}:{restricted_password}'.format(**info)
-            )
-            creds = 'Basic ' + creds.strip()
+            creds = u'{restricted_user}:{restricted_password}'.format(**info)
+            creds = base64.encodestring(creds.encode('utf-8'))
+            creds = b'Basic ' + creds.strip()
             return creds
         else:
             return None

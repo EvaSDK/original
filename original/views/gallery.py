@@ -51,12 +51,12 @@ class GalleryView(FlaskView):
             gallery = Gallery(request.args['galerie'])
             creds = gallery.credentials
             if creds is not None:
-                if creds != request.headers.get('Authorization', ''):
+                if creds != request.headers.get('Authorization', '').encode('utf-8'):
                     return (
                         render_template('gallery_locked.html'),
                         401,
                         [('WWW-authenticate',
-                          'Basic Realm='+ request.args['galerie'])]
+                          'Basic Realm=' + request.args['galerie'])]
                     )
 
             context = {
