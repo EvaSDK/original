@@ -12,9 +12,27 @@ from original.gallery import Gallery, Photo
 class GalleryView(FlaskView):
 
     def index(self):
-        if request.args.get('photo'):
-            index = int(request.args.get('photo'))
+        if request.args.get('galerie'):
             gallery = Gallery(request.args['galerie'])
+            creds = gallery.credentials
+            if creds is not None:
+                if creds != request.headers.get('Authorization',
+                                                '').encode('utf-8'):
+                    return (
+                        render_template('gallery_locked.html'),
+                        401,
+                        [('WWW-authenticate',
+                          'Basic Realm=' + request.args['galerie'])]
+                    )
+
+            if not request.args.get('photo'):
+                context = {
+                    'pictures': [photo.get_info() for photo in gallery.photos],
+                    'gallery': gallery.get_info(),
+                }
+                return render_template('gallery_detail.html', **context)
+
+            index = int(request.args.get('photo'))
             current = Photo(gallery, index)
             code = u'{}'.format(random.randint(1000, 9999))
             code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
@@ -46,25 +64,6 @@ class GalleryView(FlaskView):
             current.views += 1
 
             return render_template('gallery_photo.html', **context)
-
-        elif request.args.get('galerie'):
-            gallery = Gallery(request.args['galerie'])
-            creds = gallery.credentials
-            if creds is not None:
-                if creds != request.headers.get('Authorization', '').encode('utf-8'):
-                    return (
-                        render_template('gallery_locked.html'),
-                        401,
-                        [('WWW-authenticate',
-                          'Basic Realm=' + request.args['galerie'])]
-                    )
-
-            context = {
-                'pictures': [photo.get_info() for photo in gallery.photos],
-                'gallery': gallery.get_info(),
-            }
-            return render_template('gallery_detail.html', **context)
-
         else:
             context = {
                 'galleries': [gallery.get_info() for gallery in Gallery.all()],
