@@ -77,8 +77,8 @@ class GalleryView(FlaskView):
             index = int(request.args.get('photo'))
             gallery = Gallery(request.args['galerie'])
             current = Photo(gallery, index)
-            code = request.form['commentspamcheck']
-            code_checksum = hashlib.md5().hexdigest()
+            code = request.form['commentspamcheck'].strip()
+            code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
 
             if code_checksum != request.form['commentkolacek']:
                 return render_template('comment_failure.html')
