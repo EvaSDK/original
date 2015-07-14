@@ -124,7 +124,7 @@ class Photo(object):
         if os.path.exists(self.compute_path('hq', True)):
             info['hq'] = self.compute_path('hq')
 
-        if os.path.exists(self.compute_path('hq', True)):
+        if os.path.exists(self.compute_path('mq', True)):
             info['mq'] = self.compute_path('mq')
 
         return info
