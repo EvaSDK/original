@@ -11,7 +11,7 @@
   <a id="minus" href="?galerie={{ gallery.folder_name }}&photo={{ current.index }}"></a> :
   {% for thumb in thumbs %}
   <a href="?galerie={{ gallery.folder_name }}&photo={{ thumb.index }}&show_thumbs=yes" title="Photo">
-    <img class="thumb" src="http://www.whyte.ninja/galleries/{{ thumb.thumb }}" alt="photo No. {{ thumb.index }}"
+    <img class="thumb" src="../galleries/{{ thumb.thumb }}" alt="photo No. {{ thumb.index }}"
     {%- if thumb.orientation == "portrait" %}
     width="13" height="20"
     {% else %}
@@ -24,15 +24,15 @@
 </div>
 
 <div id="image" style="height: {{ current.height + 10 }}px">
-  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="http://www.whyte.ninja/galleries/{{ current.lq }}" />
+  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="../galleries/{{ current.lq }}" />
 
   {% if prev %}
   <div class="prevthumb">
     <a href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}">
       {% if prev.orientation == "portrait" %}
-      <img height="80" width="53" src="http://www.whyte.ninja/galleries/{{ prev.thumb }}" alt="Previous"/>
+      <img height="80" width="53" src="../galleries/{{ prev.thumb }}" alt="Previous"/>
       {% else %}
-      <img height="53" width="80" src="http://www.whyte.ninja/galleries/{{ prev.thumb }}" alt="Previous"/>
+      <img height="53" width="80" src="../galleries/{{ prev.thumb }}" alt="Previous"/>
       {% endif %}
       <br />
       Previous
@@ -44,9 +44,9 @@
   <div class="nextthumb">
     <a href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}">
       {% if next.orientation == "portrait" %}
-      <img height="80" width="53" src="http://www.whyte.ninja/galleries/{{ next.thumb }}" alt="Next"/>
+      <img height="80" width="53" src="../galleries/{{ next.thumb }}" alt="Next"/>
       {% else %}
-      <img height="53" width="80" src="http://www.whyte.ninja/galleries/{{ next.thumb }}" alt="Next"/>
+      <img height="53" width="80" src="../galleries/{{ next.thumb }}" alt="Next"/>
       {% endif %}
       <br />
       Next
@@ -64,10 +64,10 @@
   {% if current.mq or current.hq %}
   <div id="mqhq">
     {% if current.mq %}
-    <a href="http://www.whyte.ninja/galleries/{{ current.mq }}">MQ</a>
+    <a href="../galleries/{{ current.mq }}">MQ</a>
     {% endif %}
     {% if current.hq %}
-    <a href="http://www.whyte.ninja/galleries/{{ current.hq }}">HQ</a>
+    <a href="../galleries/{{ current.hq }}">HQ</a>
     {% endif %}
   </div>
   {% endif %}

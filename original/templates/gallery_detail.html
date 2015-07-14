@@ -10,11 +10,11 @@
 
   {% if picture.orientation == "portrait" %}
   <a class="portrait" title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
-    <img height="80" width="53" alt="photo No. {{ picture.index }}" src="http://www.whyte.ninja/galleries/{{ picture.thumb }}" />
+    <img height="80" width="53" alt="photo No. {{ picture.index }}" src="../galleries/{{ picture.thumb }}" />
   </a>
   {% else %}
   <a title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
-    <img height="53" width="80" alt="photo No. {{ picture.index }}" src="http://www.whyte.ninja/galleries/{{ picture.thumb }}" />
+    <img height="53" width="80" alt="photo No. {{ picture.index }}" src="../galleries/{{ picture.thumb }}" />
   </a>
   {% endif %}
 
