@@ -31,6 +31,7 @@ setup(
         'flask',
         'flask_babel',
         'flask_classy',
+        'rq',
     ],
     classifiers=[
         # https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -46,4 +47,9 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
+    entry_points={
+        'console_scripts': [
+            'original-thumbnails = original.cli:do_thumbnails',
+        ]
+    },
 )

@@ -1,4 +1,4 @@
-1.0.1 (unreleased)
+1.1.0 (unreleased)
 ------------------
 
 * Fix locked galleries credentials validation.
@@ -7,6 +7,7 @@
 * Fix typo in MQ picture check.
 * Send pictures using Flask and kill all hardcoded domain name
   references.
+* Add RQ based thumbnail generator.
 
 1.0.0 (2015-03-16)
 ------------------
