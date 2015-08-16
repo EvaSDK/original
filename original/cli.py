@@ -2,12 +2,11 @@
 
 import argparse
 import os.path
-import glob
 
 from redis import Redis
 from rq import Queue
 
-from original.tasks import generate_thumbnail
+from original.tasks import generate_thumbnails
 
 
 def do_thumbnails():
@@ -20,5 +19,4 @@ def do_thumbnails():
 
     queue = Queue(connection=Redis())
     gallery_root = os.path.abspath(args.path)
-    for photo_path in glob.glob(os.path.join(gallery_root, 'hq', '*.jpg')):
-        queue.enqueue(generate_thumbnail, gallery_root, photo_path)
+    queue.enqueue(generate_thumbnails, gallery_root)

@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import glob
 import logging
+import os
 import os.path
 
 from PIL import Image, ImageFile, ImageOps
+from redis import Redis
+from rq import Queue
 
 
 LOG = logging.getLogger(__name__)
@@ -44,3 +48,12 @@ def generate_thumbnail(gallery_path, path):
     new = new.rotate(angle)
 
     new.save(os.path.join(gallery_path, 'thumbs', os.path.basename(path)))
+
+
+def generate_thumbnails(gallery_path):
+    """Generate thumbnails for `gallery_path`."""
+    os.makedirs(os.path.join(gallery_path, 'thumbs'))
+
+    queue = Queue(connection=Redis())
+    for photo_path in glob.glob(os.path.join(gallery_path, 'hq', '*.jpg')):
+        queue.enqueue(generate_thumbnail, gallery_path, photo_path)
