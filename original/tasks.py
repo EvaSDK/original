@@ -3,7 +3,7 @@
 import logging
 import os.path
 
-from PIL import Image, ImageFile
+from PIL import Image, ImageFile, ImageOps
 
 
 LOG = logging.getLogger(__name__)
@@ -31,6 +31,16 @@ def generate_thumbnail(gallery_path, path):
     else:
         height, width = QUALITY_SETTINGS['thumbs'][0]
 
+    orientation = src._getexif().get(0x0112, 1)
     new = src.resize((width, height),
                      QUALITY_SETTINGS['thumbs'][1])
+
+    if orientation == 4:
+        new = ImageOps.mirror(new)
+    elif orientation in (2, 5, 7):
+        new = ImageOps.flip(new)
+
+    angle = {1: 0, 3: 180, 5: 90, 6: 270, 7: 270, 8: 90}.get(orientation, 1)
+    new = new.rotate(angle)
+
     new.save(os.path.join(gallery_path, 'thumbs', os.path.basename(path)))
