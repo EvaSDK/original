@@ -6,7 +6,10 @@ import io
 import os
 
 from PIL import Image
+from redis import Redis
+from rq import Queue
 
+from original.tasks import generate_thumbnails
 
 PHOTO_ROOT = '/mnt/data/www/galleries/'
 
@@ -20,6 +23,12 @@ class Gallery(object):
                              .format(relative_path))
 
         self.relative_path = relative_path
+
+        if not os.path.exists(
+            os.path.join(PHOTO_ROOT, relative_path, 'thumbs')
+        ):
+            queue = Queue(connection=Redis())
+            queue.enqueue(generate_thumbnails, self.full_path)
 
     @property
     def credentials(self):

@@ -8,6 +8,8 @@
 * Send pictures using Flask and kill all hardcoded domain name
   references.
 * Add RQ based thumbnail generator.
+* Automatically generate thumbnails of a gallery when HQ folder is
+  found but not thumbs.
 
 1.0.0 (2015-03-16)
 ------------------
