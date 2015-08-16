@@ -3,7 +3,7 @@
 import logging
 import os.path
 
-from PIL import Image
+from PIL import Image, ImageFile
 
 
 LOG = logging.getLogger(__name__)
@@ -23,6 +23,7 @@ def generate_thumbnail(gallery_path, path):
     info.txt.
     """
     LOG.debug('Generating thumbnail for %s', path)
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
     src = Image.open(path)
 
     if src.size[0] > src.size[1]:
