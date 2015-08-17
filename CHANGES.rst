@@ -10,6 +10,7 @@
 * Add RQ based thumbnail generator.
 * Automatically generate thumbnails of a gallery when HQ folder is
   found but not thumbs.
+* Fix client-based locale selection.
 
 1.0.0 (2015-03-16)
 ------------------

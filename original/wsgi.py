@@ -2,7 +2,7 @@
 
 """ Help running application. """
 
-from flask import Flask, send_from_directory
+from flask import Flask, request, send_from_directory
 from flask.ext.babel import Babel
 
 app = Flask(__name__.split('.')[0])
@@ -12,6 +12,11 @@ from original import gallery
 from original.views.gallery import GalleryView
 
 GalleryView.register(app)
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(['en', 'fr'])
 
 
 @app.route('/galleries/<path:path>')
