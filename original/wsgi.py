@@ -25,5 +25,10 @@ def send_pic(path):
     return send_from_directory(gallery.PHOTO_ROOT, path)
 
 
+def app_factory(global_config, **local_conf):
+    """PasteDeploy WSGI application factory entry-point."""
+    return app
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5004, debug=True)

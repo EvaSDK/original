@@ -27,10 +27,11 @@ setup(
     description='Photo Gallery',
     author='Gilles Dartiguelongue',
     install_requires=[
-        'pillow',
         'flask',
         'flask_babel',
         'flask_classy',
+        'pastedeploy',
+        'pillow',
         'rq',
     ],
     classifiers=[
@@ -50,6 +51,9 @@ setup(
     entry_points={
         'console_scripts': [
             'original-thumbnails = original.cli:do_thumbnails',
-        ]
+        ],
+        'paste.app_factory': [
+            'main=original.wsgi:app_factory',
+        ],
     },
 )

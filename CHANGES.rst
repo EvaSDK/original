@@ -11,6 +11,7 @@
 * Automatically generate thumbnails of a gallery when HQ folder is
   found but not thumbs.
 * Fix client-based locale selection.
+* Add a PasteDeploy application factory entry-point.
 
 1.0.0 (2015-03-16)
 ------------------
