@@ -6,7 +6,7 @@ import os.path
 from redis import Redis
 from rq import Queue
 
-from original.tasks import generate_thumbnails
+from original.tasks import resize_pictures
 
 
 def do_thumbnails():
@@ -19,4 +19,4 @@ def do_thumbnails():
 
     queue = Queue(connection=Redis())
     gallery_root = os.path.abspath(args.path)
-    queue.enqueue(generate_thumbnails, gallery_root)
+    queue.enqueue(resize_pictures, 'thumbs', gallery_root)

@@ -9,7 +9,7 @@ from PIL import Image
 from redis import Redis
 from rq import Queue
 
-from original.tasks import generate_thumbnails
+from original.tasks import QUALITY_SETTINGS, resize_pictures
 
 PHOTO_ROOT = '/mnt/data/www/galleries/'
 
