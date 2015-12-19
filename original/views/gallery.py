@@ -14,15 +14,20 @@ class GalleryView(FlaskView):
     def index(self):
         if request.args.get('galerie'):
             gallery = Gallery(request.args['galerie'])
-            creds = gallery.credentials
-            if creds is not None:
-                if creds != request.headers.get('Authorization',
-                                                '').encode('utf-8'):
+            if gallery.has_credentials:
+                creds = request.headers.get('Authorization',
+                                            '').encode('iso-8859-1')
+                if request.user_agent.browser in ('chrome', 'opera'):
+                    g_creds = gallery.get_credentials('utf-8')
+                else:
+                    g_creds = gallery.get_credentials('iso-8859-1')
+
+                if g_creds != creds:
                     return (
                         render_template('gallery_locked.html'),
                         401,
                         [('WWW-authenticate',
-                          'Basic Realm=' + request.args['galerie'])]
+                          'Basic Realm="' + request.args['galerie'] + '", encoding="ISO-8859-1"')]
                     )
 
             if not request.args.get('photo'):

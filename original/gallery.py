@@ -31,15 +31,19 @@ class Gallery(object):
             queue.enqueue(generate_thumbnails, self.full_path)
 
     @property
-    def credentials(self):
+    def has_credentials(self):
         info = self.get_info()
-        if 'restricted_user' in info:
-            creds = u'{restricted_user}:{restricted_password}'.format(**info)
-            creds = base64.encodestring(creds.encode('utf-8'))
-            creds = b'Basic ' + creds.strip()
-            return creds
-        else:
+        return 'restricted_user' in info
+
+    def get_credentials(self, encoding):
+        if not self.has_credentials:
             return None
+
+        info = self.get_info()
+        creds = u'{restricted_user}:{restricted_password}'.format(**info)
+        creds = base64.encodestring(creds.encode(encoding))
+        creds = b'Basic ' + creds.strip()
+        return creds
 
     @property
     def full_path(self):
