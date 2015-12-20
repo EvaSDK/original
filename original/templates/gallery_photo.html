@@ -8,10 +8,10 @@
 <!-- thumbroll -->
 <div class="thumbroll">
   {% if thumbs %}
-  <a id="minus" href="?galerie={{ gallery.folder_name }}&photo={{ current.index }}"></a> :
+  <a id="minus" href="?galerie={{ gallery.folder_name }}&photo={{ current.filename }}"></a> :
   {% for thumb in thumbs %}
-  <a href="?galerie={{ gallery.folder_name }}&photo={{ thumb.index }}&show_thumbs=yes" title="Photo">
-    <img class="thumb" src="../galleries/{{ thumb.thumb }}" alt="photo No. {{ thumb.index }}"
+  <a href="?galerie={{ gallery.folder_name }}&photo={{ thumb.filename }}&show_thumbs=yes" title="Photo">
+    <img class="thumb" src="../galleries/{{ thumb.thumb }}" alt="photo No. {{ loop.index }}"
     {%- if thumb.orientation == "portrait" %}
     width="13" height="20"
     {% else %}
@@ -19,7 +19,7 @@
     {% endif %} /></a>
 {% endfor %}
 {% else %}
-  <a id="plus" href="?galerie={{ gallery.folder_name }}&photo={{ current.index }}&show_thumbs=yes" title="Show Thumbnail Navigation"></a>
+  <a id="plus" href="?galerie={{ gallery.folder_name }}&photo={{ current.filename }}&show_thumbs=yes" title="Show Thumbnail Navigation"></a>
 {% endif %}
 </div>
 
@@ -28,7 +28,7 @@
 
   {% if prev %}
   <div class="prevthumb">
-    <a href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}">
+    <a href="?galerie={{ gallery.folder_name }}&photo={{ prev.filename }}">
       {% if prev.orientation == "portrait" %}
       <img height="80" width="53" src="../galleries/{{ prev.thumb }}" alt="Previous"/>
       {% else %}
@@ -42,7 +42,7 @@
 
   {% if next %}
   <div class="nextthumb">
-    <a href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}">
+    <a href="?galerie={{ gallery.folder_name }}&photo={{ next.filename }}">
       {% if next.orientation == "portrait" %}
       <img height="80" width="53" src="../galleries/{{ next.thumb }}" alt="Next"/>
       {% else %}
@@ -56,7 +56,7 @@
 </div>
 
 <div class="comment">
-  <span>Photo {{ current.index }}</span>
+  <span>Photo {{ index }}</span>
   <div id="log">
     {% trans views=current.views %}This image has been viewed <strong>{{ views }}</strong> times.{% endtrans %}
   </div>
@@ -127,11 +127,11 @@
 <div class="navbuttons">
   <div class="navbuttonsshell">
     {%- if prev %}
-    <a id="previcon" href="?galerie={{ gallery.folder_name }}&photo={{ prev.index }}exif_style=&amp;show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="p">&lt; {% trans %}<span class="accesskey">P</span>revious{% endtrans %}</a>
+    <a id="previcon" href="?galerie={{ gallery.folder_name }}&photo={{ prev.filename }}exif_style=&amp;show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="p">&lt; {% trans %}<span class="accesskey">P</span>revious{% endtrans %}</a>
     {% endif %}
     &nbsp;
     {%- if next %}
-    <a id="nexticon" href="?galerie={{ gallery.folder_name }}&photo={{ next.index }}&exif_style=&show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="n">{% trans %}<span class="accesskey">N</span>ext{% endtrans %} &gt;</a>
+    <a id="nexticon" href="?galerie={{ gallery.folder_name }}&photo={{ next.filename }}&exif_style=&show_thumbs={%- if thumbs %}yes{% endif %}" accesskey="n">{% trans %}<span class="accesskey">N</span>ext{% endtrans %} &gt;</a>
     {% endif %}
   </div>
 </div>

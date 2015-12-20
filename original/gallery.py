@@ -2,8 +2,14 @@
 
 import base64
 import datetime
+import glob
 import io
 import os
+
+try:
+    from urllib import quote as urlquote
+except ImportError:
+    from urllib.parse import quote as urlquote
 
 from PIL import Image
 from redis import Redis
@@ -70,7 +76,7 @@ class Gallery(object):
                          for line in info_fd.readlines()])
             info['date'] = datetime.datetime.strptime(info['date'].strip(),
                                                       '%Y-%m-%d').date()
-            info['folder_name'] = info.pop('folder-name')
+            info['folder_name'] = urlquote(info.pop('folder-name'))
 
         return info
 
@@ -83,35 +89,28 @@ class Gallery(object):
 
 class Photo(object):
 
-    def __init__(self, gallery, index):
+    def __init__(self, gallery, filename):
         self.gallery = gallery
-        self.index = index
+        self.filename = filename
 
         if not os.path.exists(self.compute_path('thumbs', True)):
-            raise ValueError("Photo #{} of gallery '{}' does not exist"
-                             .format(self.index, self.gallery.relative_path))
+            raise ValueError("Photo {} of gallery '{}' does not exist"
+                             .format(self.filename, self.gallery.relative_path))
 
     @classmethod
     def all(cls, gallery):
-        """ List all photos of `gallery`.
+        """List all photos of `gallery`."""
+        for path in glob.iglob(os.path.join(gallery.full_path, 'hq', '*.jpg')):
+            yield cls(gallery, os.path.basename(path))
 
-        Photos are numbered sequentially so stop iterating on first exception.
-        """
-        idx = 0
-        while True:
-            idx = idx + 1
-
-            try:
-                yield Photo(gallery, idx)
-            except ValueError:
-                raise StopIteration
+        raise StopIteration
 
     def compute_path(self, size, absolute=False):
         """Compute path to image variants."""
         return os.path.join(
             self.gallery.full_path if absolute else self.gallery.relative_path,
             size,
-            'img-{}.jpg'.format(self.index),
+            self.filename,
         )
 
     def get_info(self):
@@ -131,7 +130,7 @@ class Photo(object):
             'height': im.size[1],
             'width': im.size[0],
             'views': self.views,
-            'index': self.index,
+            'filename': self.filename,
         }
 
         if os.path.exists(self.compute_path('hq', True)):
@@ -146,7 +145,7 @@ class Photo(object):
         """Comments associated to photo."""
         comment_path = os.path.join(
             self.gallery.full_path, 'comments',
-            'user_{}.txt'.format(self.index)
+            self.filename + '.txt',
         )
         if not os.path.exists(comment_path):
              return None
@@ -158,7 +157,7 @@ class Photo(object):
         """Set comments associated to photo."""
         comment_path = os.path.join(
             self.gallery.full_path, 'comments',
-            'user_{}.txt'.format(self.index)
+            self.filename + '.txt',
         )
 
         with io.open(comment_path, 'at', encoding='utf-8') as comment_file:
@@ -168,7 +167,7 @@ class Photo(object):
     def views(self):
         """Number of time photo has been viewed."""
         view_path = os.path.join(
-            self.gallery.full_path, 'comments', 'log_{}.txt'.format(self.index)
+            self.gallery.full_path, 'comments', self.filename + '.log',
         )
         if os.path.exists(view_path):
             with io.open(view_path, encoding='utf-8') as view_file:
@@ -182,7 +181,7 @@ class Photo(object):
     def views(self, value):
         """Set number of time photo has been viewed."""
         view_path = os.path.join(
-            self.gallery.full_path, 'comments', 'log_{}.txt'.format(self.index)
+            self.gallery.full_path, 'comments', self.filename + '.log',
         )
         with io.open(view_path, 'wt', encoding='utf-8') as view_file:
             view_file.write(u'{0:d}'.format(value))

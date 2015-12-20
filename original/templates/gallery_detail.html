@@ -6,15 +6,15 @@
 <!-- listing galleries-->
 
 <p class="bigthumbnails">
-{% for picture in pictures %}
+{% for picture in pictures|sort(attribute="filename") %}
 
   {% if picture.orientation == "portrait" %}
-  <a class="portrait" title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
-    <img height="80" width="53" alt="photo No. {{ picture.index }}" src="../galleries/{{ picture.thumb }}" />
+  <a class="portrait" title="Photo {{ loop.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.filename }}">
+    <img height="80" width="53" alt="photo No. {{ loop.index }}" src="../galleries/{{ picture.thumb }}" />
   </a>
   {% else %}
-  <a title="Photo {{ picture.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.index }}">
-    <img height="53" width="80" alt="photo No. {{ picture.index }}" src="../galleries/{{ picture.thumb }}" />
+  <a title="Photo {{ loop.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.filename }}">
+    <img height="53" width="80" alt="photo No. {{ loop.index }}" src="../galleries/{{ picture.thumb }}" />
   </a>
   {% endif %}
 

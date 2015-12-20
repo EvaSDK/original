@@ -3,6 +3,11 @@
 import hashlib
 import random
 
+try:
+    from urllib import unquote as urlunquote
+except ImportError:
+    from urllib.parse import unquote as urlunquote
+
 from flask import render_template, request
 from flask_classy import FlaskView
 
@@ -13,7 +18,7 @@ class GalleryView(FlaskView):
 
     def index(self):
         if request.args.get('galerie'):
-            gallery = Gallery(request.args['galerie'])
+            gallery = Gallery(urlunquote(request.args['galerie']))
             if gallery.has_credentials:
                 creds = request.headers.get('Authorization',
                                             '').encode('iso-8859-1')
@@ -30,19 +35,30 @@ class GalleryView(FlaskView):
                           'Basic Realm="' + request.args['galerie'] + '", encoding="ISO-8859-1"')]
                     )
 
+            pictures = sorted(list(gallery.photos), key=lambda pic: pic.filename)
+
             if not request.args.get('photo'):
                 context = {
-                    'pictures': [photo.get_info() for photo in gallery.photos],
+                    'pictures': [photo.get_info() for photo in pictures],
                     'gallery': gallery.get_info(),
                 }
                 return render_template('gallery_detail.html', **context)
 
-            index = int(request.args.get('photo'))
-            current = Photo(gallery, index)
+            filename = request.args.get('photo')
+            current = None
+            for index, pic in enumerate(pictures):
+                if pic.filename == filename:
+                    current = pic
+                    break
+            else:
+                # TODO: write template
+                return (None, 404)
+
             code = u'{}'.format(random.randint(1000, 9999))
             code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
 
             context = {
+                'index': index + 1,
                 'gallery': gallery.get_info(),
                 'current': current.get_info(),
                 'comments': current.get_comments(),
@@ -52,19 +68,16 @@ class GalleryView(FlaskView):
                 },
             }
 
-            try:
-                context['prev'] = Photo(gallery, index - 1).get_info()
-            except ValueError:
-                pass
+            if index > 1:
+                context['prev'] = pictures[index - 1].get_info()
 
             try:
-                context['next'] = Photo(gallery, index + 1).get_info()
-            except ValueError:
+                context['next'] = pictures[index + 1].get_info()
+            except IndexError:
                 pass
 
             if request.args.get('show_thumbs') == 'yes':
-                context['thumbs'] = [photo.get_info()
-                                     for photo in gallery.photos]
+                context['thumbs'] = [photo.get_info() for photo in pictures]
 
             current.views += 1
 
@@ -78,9 +91,9 @@ class GalleryView(FlaskView):
     def post(self):
 
         if request.args.get('photo'):
-            index = int(request.args.get('photo'))
+            filename = request.args.get('photo')
             gallery = Gallery(request.args['galerie'])
-            current = Photo(gallery, index)
+            current = Photo(gallery, filename)
             code = request.form['commentspamcheck'].strip()
             code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
 
