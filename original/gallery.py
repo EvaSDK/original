@@ -50,11 +50,11 @@ class Gallery(object):
         return os.path.join(PHOTO_ROOT, self.relative_path)
 
     @classmethod
-    def all(self):
+    def all(cls):
         """List galleries."""
         for dirname in os.listdir(PHOTO_ROOT):
             try:
-                yield Gallery(os.path.join(PHOTO_ROOT, dirname))
+                yield cls(os.path.join(PHOTO_ROOT, dirname))
             except ValueError:
                 pass
 
