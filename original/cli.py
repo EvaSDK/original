@@ -19,4 +19,5 @@ def do_thumbnails():
 
     queue = Queue(connection=Redis())
     gallery_root = os.path.abspath(args.path)
-    queue.enqueue(resize_pictures, 'thumbs', gallery_root)
+    queue.enqueue(resize_pictures, gallery_root, 'thumbs')
+    queue.enqueue(resize_pictures, gallery_root, 'lq')
