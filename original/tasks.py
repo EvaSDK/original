@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import division
+
 import glob
 import logging
 import os
@@ -38,10 +40,16 @@ def resize_picture(gallery_path, path, quality):
     else:
         height, width = QUALITY_SETTINGS[quality][0]
 
-    orientation = src._getexif().get(0x0112, 1)
-    new = src.resize((width, height),
-                     QUALITY_SETTINGS[quality][1])
+    src_ratio =  src.width / src.height
+    new_ratio = width / height
+    if src_ratio < new_ratio:
+        size = (int(height * src_ratio), height)
+    else:
+        size = (width, int(width / src_ratio))
 
+    new = src.resize(size, QUALITY_SETTINGS[quality][1])
+
+    orientation = src._getexif().get(0x0112, 1)
     if orientation == 4:
         new = ImageOps.mirror(new)
     elif orientation in (2, 5, 7):
