@@ -115,29 +115,35 @@ class Photo(object):
 
     def get_info(self):
         """Information to render photo."""
-        im = Image.open(self.compute_path('lq', True))
-
-        if im.size[0] > im.size[1]:
-            orientation = 'landscape'
-        else:
-            orientation = 'portrait'
-
-
         info = {
-            'lq': self.compute_path('lq'),
             'thumb': self.compute_path('thumbs'),
-            'orientation': orientation,
-            'height': im.size[1],
-            'width': im.size[0],
             'views': self.views,
             'filename': self.filename,
         }
 
-        if os.path.exists(self.compute_path('hq', True)):
-            info['hq'] = self.compute_path('hq')
+        path = self.compute_path('lq', True)
+        if os.path.exists(path):
+            im = Image.open(path)
+            info.update({
+                'height': im.size[1],
+                'width': im.size[0],
+            })
+        else:
+            path = self.compute_path('hq', True)
+            im = Image.open(path)
+            info.update({
+                'height': im.size[1],
+                'width': im.size[0],
+            })
 
-        if os.path.exists(self.compute_path('mq', True)):
-            info['mq'] = self.compute_path('mq')
+        if im.size[0] > im.size[1]:
+            info['orientation'] = 'landscape'
+        else:
+            info['orientation'] = 'portrait'
+
+        for res in ('lq', 'mq', 'hq'):
+            if os.path.exists(self.compute_path(res, True)):
+                info[res] = self.compute_path(res)
 
         return info
 
