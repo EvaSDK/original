@@ -1,4 +1,4 @@
-1.1.0 (unreleased)
+1.1.0 (2016-02-07)
 ------------------
 
 * Fix locked galleries credentials validation.
