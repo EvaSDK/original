@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="navigation"><a href="./">{% trans %}Photo Gallery Index{% endtrans %}</a> &gt; <a href="?galerie={{ gallery.folder_name }}">{{ gallery.name }}</a></div>
+
+<div class="error">
+  <h1>{% trans %}Not Found{% endtrans %}</h1>
+  <p>{% trans %}Sorry, this picture does not exist.{% endtrans %}</p>
+  <p><a href="?galerie={{ gallery.folder_name }}">{% trans %}Return to gallery{% endtrans %}</a></p>
+</div>
+
+{% endblock %}

@@ -18,7 +18,12 @@ class GalleryView(FlaskView):
 
     def index(self):
         if request.args.get('galerie'):
-            gallery = Gallery(urlunquote(request.args['galerie']))
+            try:
+                gallery = Gallery(urlunquote(request.args['galerie']))
+                LOG.warn('Opening %s', gallery)
+            except ValueError:
+                return render_template('gallery_404.html'), 404
+
             if gallery.has_credentials:
                 creds = request.headers.get('Authorization',
                                             '').encode('iso-8859-1')
@@ -51,8 +56,8 @@ class GalleryView(FlaskView):
                     current = pic
                     break
             else:
-                # TODO: write template
-                return (None, 404)
+                return render_template('picture_404.html',
+                                       gallery=gallery.get_info()), 404
 
             code = u'{}'.format(random.randint(1000, 9999))
             code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
