@@ -12,6 +12,9 @@
   found but not thumbs.
 * Fix client-based locale selection.
 * Add a PasteDeploy application factory entry-point.
+* Fix BasicAuth on various browsers.
+* Allow using any filename for pictures rather than sequantial numbers.
+* Make all templates derive from base.html.
 
 1.0.0 (2015-03-16)
 ------------------
