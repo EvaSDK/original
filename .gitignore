@@ -2,4 +2,5 @@
 *.mo
 *.py[co]
 *~
-venv
+/dist
+/venv
