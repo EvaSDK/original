@@ -53,7 +53,7 @@ setup(
             'original-thumbnails = original.cli:do_thumbnails',
         ],
         'paste.app_factory': [
-            'main=original.wsgi:app_factory',
+            'main=original.app:app_factory',
         ],
     },
 )

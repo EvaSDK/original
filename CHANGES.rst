@@ -1,3 +1,8 @@
+1.1.1 (unreleased)
+------------------
+
+* Move application creation to a dedicated module.
+
 1.1.0 (2016-02-07)
 ------------------
 
