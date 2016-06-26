@@ -16,7 +16,7 @@ def get_version():
         os.path.dirname(__file__), MODULE_NAME, '__init__.py')
     ) as init:
         for line in init.readlines():
-            res = re.match(r'__version__ *= *[\'"]([0-9\.]*)[\'"]$', line)
+            res = re.match(r'^__version__ = [\'"](.*)[\'"]$', line)
             if res:
                 return res.group(1)
 
