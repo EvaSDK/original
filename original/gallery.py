@@ -11,19 +11,19 @@ try:
 except ImportError:
     from urllib.parse import quote as urlquote
 
+from flask import current_app as app
 from PIL import Image
 from redis import Redis
 from rq import Queue
 
 from original.tasks import QUALITY_SETTINGS, resize_pictures
 
-PHOTO_ROOT = '/mnt/data/www/galleries/'
-
 
 class Gallery(object):
 
     def __init__(self, relative_path):
-        info_txt = os.path.join(PHOTO_ROOT, relative_path, 'info.txt')
+        info_txt = os.path.join(app.config['GALLERY_ROOT'], relative_path,
+                                'info.txt')
         if not os.path.exists(info_txt):
             raise ValueError("'{}' is not a valid gallery"
                              .format(relative_path))
@@ -31,7 +31,7 @@ class Gallery(object):
         self.relative_path = relative_path
 
         if not os.path.exists(
-            os.path.join(PHOTO_ROOT, relative_path, 'thumbs')
+            os.path.join(app.config['GALLERY_ROOT'], relative_path, 'thumbs')
         ):
             queue = Queue(connection=Redis())
             queue.enqueue(generate_thumbnails, self.full_path)
@@ -53,14 +53,14 @@ class Gallery(object):
 
     @property
     def full_path(self):
-        return os.path.join(PHOTO_ROOT, self.relative_path)
+        return os.path.join(app.config['GALLERY_ROOT'], self.relative_path)
 
     @classmethod
     def all(cls):
         """List galleries."""
-        for dirname in os.listdir(PHOTO_ROOT):
+        for dirname in os.listdir(app.config['GALLERY_ROOT']):
             try:
-                yield cls(os.path.join(PHOTO_ROOT, dirname))
+                yield cls(os.path.join(app.config['GALLERY_ROOT'], dirname))
             except ValueError:
                 pass
 

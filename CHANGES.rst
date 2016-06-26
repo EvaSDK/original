@@ -1,7 +1,8 @@
-1.1.1 (unreleased)
+1.2.0 (unreleased)
 ------------------
 
 * Move application creation to a dedicated module.
+* Read configuration passed by Paste.
 
 1.1.0 (2016-02-07)
 ------------------
