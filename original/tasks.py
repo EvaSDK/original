@@ -8,9 +8,7 @@ import os
 import os.path
 
 from PIL import Image, ImageFile, ImageOps
-from redis import Redis
 from rq import Queue
-
 
 LOG = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
@@ -61,13 +59,13 @@ def resize_picture(gallery_path, path, quality):
     new.save(os.path.join(gallery_path, quality, os.path.basename(path)))
 
 
-def resize_pictures(gallery_path, quality):
+def resize_pictures(gallery_path, quality, connection=None):
     """Generate thumbnails for `gallery_path`."""
     if quality not in QUALITY_SETTINGS:
         raise ValueError('Quality %s is not a valid setting' % quality)
 
     os.makedirs(os.path.join(gallery_path, quality))
 
-    queue = Queue(connection=Redis())
+    queue = Queue(connection=connection)
     for photo_path in glob.glob(os.path.join(gallery_path, 'hq', '*.jpg')):
         queue.enqueue(resize_picture, gallery_path, photo_path, quality)
