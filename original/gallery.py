@@ -95,7 +95,8 @@ class Photo(object):
 
         if not os.path.exists(self.compute_path('thumbs', True)):
             raise ValueError("Photo {} of gallery '{}' does not exist"
-                             .format(self.filename, self.gallery.relative_path))
+                             .format(self.filename,
+                                     self.gallery.relative_path))
 
     @classmethod
     def all(cls, gallery):
@@ -154,7 +155,7 @@ class Photo(object):
             self.filename + '.txt',
         )
         if not os.path.exists(comment_path):
-             return None
+            return None
 
         with io.open(comment_path, encoding='utf-8') as comment_file:
             return comment_file.read()

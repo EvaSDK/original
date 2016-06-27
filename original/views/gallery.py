@@ -37,10 +37,13 @@ class GalleryView(FlaskView):
                         render_template('gallery_locked.html'),
                         401,
                         [('WWW-authenticate',
-                          'Basic Realm="' + request.args['galerie'] + '", encoding="ISO-8859-1"')]
+                          'Basic Realm="{}", encoding="ISO-8859-1"'.format(
+                              request.args['galerie']
+                          ))]
                     )
 
-            pictures = sorted(list(gallery.photos), key=lambda pic: pic.filename)
+            pictures = sorted(list(gallery.photos),
+                              key=lambda pic: pic.filename)
 
             if not request.args.get('photo'):
                 context = {
@@ -105,12 +108,14 @@ class GalleryView(FlaskView):
             if code_checksum != request.form['commentkolacek']:
                 return render_template('comment_failure.html')
 
-            current.append_comment(u"""<div class="commententry">
+            current.append_comment(
+                u"""<div class="commententry">
 <div class="name">Comment from<em>{commentname}</em></div>
 <div class="commentdata">{commentdata}</div>
-</div>""".format(
-    commentname=request.form['commentname'],
-    commentdata=request.form['commentdata']
-))
+</div>"""
+                .format(
+                    commentname=request.form['commentname'],
+                    commentdata=request.form['commentdata']
+                ))
 
         return self.index()

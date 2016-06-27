@@ -38,7 +38,7 @@ def resize_picture(gallery_path, path, quality):
     else:
         height, width = QUALITY_SETTINGS[quality][0]
 
-    src_ratio =  src.width / src.height
+    src_ratio = src.width / src.height
     new_ratio = width / height
     if src_ratio < new_ratio:
         size = (int(height * src_ratio), height)
