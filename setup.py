@@ -27,8 +27,8 @@ setup(
     author='Gilles Dartiguelongue',
     install_requires=[
         'flask',
-        'flask_babel',
-        'flask_classy',
+        'flask-babel',
+        'flask-classy',
         'pastedeploy',
         'pillow',
         'rq',
