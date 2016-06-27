@@ -34,7 +34,7 @@ class Gallery(object):
             os.path.join(app.config['GALLERY_ROOT'], relative_path, 'thumbs')
         ):
             queue = Queue(connection=Redis.from_url(app.config['REDIS_URL']))
-            queue.enqueue(generate_thumbnails, self.full_path)
+            queue.enqueue(resize_pictures, self.full_path)
 
     @property
     def has_credentials(self):
