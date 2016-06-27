@@ -3,6 +3,7 @@
 
 * Move application creation to a dedicated module.
 * Read configuration passed by Paste.
+* Fix various typos.
 
 1.1.0 (2016-02-07)
 ------------------

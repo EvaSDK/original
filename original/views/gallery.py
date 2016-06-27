@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import hashlib
+import logging
 import random
 
 try:
@@ -12,6 +13,8 @@ from flask import render_template, request
 from flask_classy import FlaskView
 
 from original.gallery import Gallery, Photo
+
+LOG = logging.getLogger(__name__)
 
 
 class GalleryView(FlaskView):
