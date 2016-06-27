@@ -16,7 +16,7 @@ from PIL import Image
 from redis import Redis
 from rq import Queue
 
-from original.tasks import QUALITY_SETTINGS, resize_pictures
+from original.tasks import resize_pictures
 
 
 class Gallery(object):
