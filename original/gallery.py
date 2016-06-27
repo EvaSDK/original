@@ -33,7 +33,7 @@ class Gallery(object):
         if not os.path.exists(
             os.path.join(app.config['GALLERY_ROOT'], relative_path, 'thumbs')
         ):
-            queue = Queue(connection=Redis())
+            queue = Queue(connection=Redis.from_url(app.config['REDIS_URL']))
             queue.enqueue(generate_thumbnails, self.full_path)
 
     @property

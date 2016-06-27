@@ -17,6 +17,7 @@ def create_app(config=None):
         'GALLERY_ROOT': os.path.abspath(os.path.join(
             os.path.dirname(__file__), '..', 'gallery'
         )),
+        'REDIS_URL': 'redis://localhost:6379/0',
     }
 
     if config is not None:
