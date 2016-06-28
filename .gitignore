@@ -2,5 +2,6 @@
 *.mo
 *.py[co]
 *~
+.coverage
 /dist
-/venv
+/venv*
