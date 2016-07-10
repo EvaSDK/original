@@ -1,4 +1,4 @@
-1.2.0 (unreleased)
+1.2.0 (2016-07-10)
 ------------------
 
 * Move application creation to a dedicated module.
