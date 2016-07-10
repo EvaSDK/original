@@ -5,7 +5,7 @@
 import os
 
 from flask import Flask
-from flask_babel import Babel
+from flask.ext.babel import Babel, format_date, format_datetime
 
 from original.views import get_locale, send_pic
 from original.views.gallery import GalleryView
@@ -34,7 +34,9 @@ def create_app(config=None):
     app.add_url_rule('/galleries/<path:path>', send_pic, methods=['GET'])
 
     babel = Babel(app)
-    babel.localeselector = get_locale
+    babel.localeselector(get_locale)
+    app.jinja_env.filters['date'] = format_date
+    app.jinja_env.filters['datetime'] = format_datetime
 
     GalleryView.register(app)
     return app
