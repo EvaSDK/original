@@ -38,6 +38,12 @@ setup(
     author_email='gilles.dartiguelongue@esiee.org',
     url='https://github.com/EvaSDK/original',
     packages=find_packages(),
+    package_data={
+        'original': [
+            'templates/*',
+            'translations/*/LC_MESSAGES/*.mo',
+        ],
+    },
     install_requires=[
         'flask',
         'flask-babel',
