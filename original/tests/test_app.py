@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import os
-import tempfile
+try:
+    from tempfile import TemporaryDirectory
+except ImportError:
+    from backports.tempfile import TemporaryDirectory
+
 import unittest
 
 from original.app import create_app
@@ -13,7 +16,7 @@ class TestApp(unittest.TestCase):
         super(TestApp, self).setUp()
         self.app = create_app()
         self.app.config['TESTING'] = True
-        self.gallery = tempfile.TemporaryDirectory()
+        self.gallery = TemporaryDirectory()
         self.app.config['GALLERY_ROOT'] = self.gallery.name
         self.client = self.app.test_client()
 

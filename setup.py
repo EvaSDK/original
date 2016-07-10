@@ -52,6 +52,9 @@ setup(
         'pillow',
         'rq',
     ],
+    extras_require={
+        ':python_version=="2.7"': ['backports.tempfile'],
+    },
     classifiers=[
         # https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 2 - Pre-Alpha',
