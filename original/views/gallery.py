@@ -23,7 +23,7 @@ class GalleryView(FlaskView):
         if request.args.get('galerie'):
             try:
                 gallery = Gallery(urlunquote(request.args['galerie']))
-                LOG.warn('Opening %s', gallery)
+                LOG.warning('Opening %s', gallery)
             except ValueError:
                 return render_template('gallery_404.html'), 404
 
