@@ -31,7 +31,7 @@ def create_app(config=None):
 
     app.config.update(app_config)
 
-    app.add_url_rule('/galleries/<path:path>', send_pic, methods=['GET'])
+    app.add_url_rule('/galleries/<path:path>', view_func=send_pic, methods=['GET'])
 
     babel = Babel(app)
     babel.localeselector(get_locale)
