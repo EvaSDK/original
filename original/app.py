@@ -5,7 +5,7 @@
 import os
 
 from flask import Flask
-from flask.ext.babel import Babel, format_date, format_datetime
+from flask_babel import Babel, format_date, format_datetime
 
 from original.views import get_locale, send_pic
 from original.views.gallery import GalleryView
