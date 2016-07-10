@@ -16,4 +16,29 @@ original
 About
 -----
 
-Fork of original photo gallery from Jakub 'Jimmar' Steiner.
+A simple python photo gallery application, fork of PHP's `original <http://jimmac.musichall.cz/original.php>`_ photo gallery from Jakub 'Jimmac' Steiner.
+
+Installation
+------------
+
+Create and activate a virtualenv::
+
+    $ virtualenv venv
+    $ . venv/bin/activate
+
+If you simply want to run the project::
+
+    (venv) $ pip install git+https://github.com/EvaSDK/original.git#egg=original-dev
+
+If you need to do some development::
+
+    (venv) $ git clone git@github.com:EvaSDK/original.git
+    (venv) $ cd original
+    (venv) $ pip install -e .
+
+Run
+---
+
+Simply source your virtualenv and run::
+
+    (venv) $ python -m original.wsgi
