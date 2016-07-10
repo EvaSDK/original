@@ -39,6 +39,10 @@ If you need to do some development::
 Run
 ---
 
-Simply source your virtualenv and run::
+For development, simply source your virtualenv and run::
 
     (venv) $ python -m original.wsgi
+
+Otherwise, use a WSGI server, like gunicorn or uwsgi::
+
+    $ uwsgi --ini-paste ./conf/paste.ini --http 127.0.0.1:5000
