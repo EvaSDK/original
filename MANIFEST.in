@@ -1,0 +1,9 @@
+graft original/static
+graft original/templates
+graft scripts
+include CHANGES.rst
+include MANIFEST.in
+include TODO.rst
+include babel.cfg
+include conf/paste.ini
+include original/translations *.pot *.po

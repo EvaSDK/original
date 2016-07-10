@@ -25,6 +25,9 @@ setup(
     version=get_version(),
     description='Photo Gallery',
     author='Gilles Dartiguelongue',
+    author_email='gilles.dartiguelongue@esiee.org',
+    url='https://github.com/EvaSDK/original',
+    packages=find_packages(),
     install_requires=[
         'flask',
         'flask-babel',

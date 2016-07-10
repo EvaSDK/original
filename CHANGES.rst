@@ -5,6 +5,7 @@
 * Read configuration passed by Paste.
 * Fix various typos.
 * Add sample PasteDeploy configuration.
+* Fix setuptools packaging.
 
 1.1.0 (2016-02-07)
 ------------------
