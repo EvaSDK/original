@@ -20,10 +20,20 @@ def get_version():
                 return res.group(1)
 
 
+def get_long_description():
+    with open(os.path.join(
+        os.path.dirname(__file__), 'README.rst'
+    )) as readme, open(os.path.join(
+        os.path.dirname(__file__), 'CHANGES.rst'
+    )) as changes:
+        return readme.read() + '\n' + changes.read()
+
+
 setup(
     name='original',
     version=get_version(),
     description='Photo Gallery',
+    long_description=get_long_description(),
     author='Gilles Dartiguelongue',
     author_email='gilles.dartiguelongue@esiee.org',
     url='https://github.com/EvaSDK/original',
