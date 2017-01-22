@@ -55,6 +55,19 @@
   {% endif %}
 </div>
 
+{% if current.exif %}
+<div id="exif_table" style="display: block;">
+  <table class="exif" border="0">
+    {% for key, value in current.exif.items() %}
+    <tr>
+      <td align="right">{{ value[0] }}</td>
+      <td><b>{{ value[1] }}</b></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
 <div class="comment">
   <span>Photo {{ index }}</span>
   <div id="log">

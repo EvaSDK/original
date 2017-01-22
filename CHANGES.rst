@@ -1,7 +1,7 @@
-1.2.1 (unreleased)
+1.3.0 (unreleased)
 ------------------
 
-* No entry.
+* Read EXIF data from pictures.
 
 1.2.0 (2016-07-10)
 ------------------

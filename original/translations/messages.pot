@@ -1,21 +1,41 @@
 # Translations template for original.
-# Copyright (C) 2016 Gilles Dartiguelongue
+# Copyright (C) 2017 Gilles Dartiguelongue
 # This file is distributed under the same license as the original project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: original 1.2.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-10 18:53+0200\n"
+"POT-Creation-Date: 2017-01-22 19:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: original/gallery.py:154
+msgid "Camera Model"
+msgstr ""
+
+#: original/gallery.py:155
+msgid "Lens Model"
+msgstr ""
+
+#: original/gallery.py:156
+msgid "Time of exposure"
+msgstr ""
+
+#: original/gallery.py:158
+msgid "F Stop"
+msgstr ""
+
+#: original/gallery.py:160
+msgid "Film/Chip Sensitivity"
+msgstr ""
 
 #: original/templates/base.html:24
 msgid "show styles"
@@ -87,48 +107,48 @@ msgstr ""
 msgid "Sorry, this gallery is restricted"
 msgstr ""
 
-#: original/templates/gallery_photo.html:61
+#: original/templates/gallery_photo.html:74
 #, python-format
 msgid "This image has been viewed <strong>%(views)s</strong> times."
 msgstr ""
 
-#: original/templates/gallery_photo.html:77
+#: original/templates/gallery_photo.html:90
 msgid "Post a Comment"
 msgstr ""
 
-#: original/templates/gallery_photo.html:81
+#: original/templates/gallery_photo.html:94
 msgid "Show Form"
 msgstr ""
 
-#: original/templates/gallery_photo.html:82
+#: original/templates/gallery_photo.html:95
 msgid "Hide Form"
 msgstr ""
 
-#: original/templates/gallery_photo.html:90
+#: original/templates/gallery_photo.html:103
 msgid "Name:"
 msgstr ""
 
-#: original/templates/gallery_photo.html:94
+#: original/templates/gallery_photo.html:107
 msgid "Remember Name:"
 msgstr ""
 
-#: original/templates/gallery_photo.html:103
+#: original/templates/gallery_photo.html:116
 msgid "Retype PIN Above:"
 msgstr ""
 
-#: original/templates/gallery_photo.html:107
+#: original/templates/gallery_photo.html:120
 msgid "Comment :"
 msgstr ""
 
-#: original/templates/gallery_photo.html:112
+#: original/templates/gallery_photo.html:125
 msgid "Send"
 msgstr ""
 
-#: original/templates/gallery_photo.html:130
+#: original/templates/gallery_photo.html:143
 msgid "<span class=\"accesskey\">P</span>revious"
 msgstr ""
 
-#: original/templates/gallery_photo.html:134
+#: original/templates/gallery_photo.html:147
 msgid "<span class=\"accesskey\">N</span>ext"
 msgstr ""
 

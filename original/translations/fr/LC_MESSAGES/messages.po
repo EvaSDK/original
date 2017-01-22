@@ -1,14 +1,14 @@
 # French translations for original.
 # Copyright (C) 2016 Gilles Dartiguelongue
 # This file is distributed under the same license as the original project.
-# Gilles Dartiguelongue <gilles.dartiguelongue@esiee.org>, 2016.
+# Gilles Dartiguelongue <gilles.dartiguelongue@esiee.org>, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-10 18:53+0200\n"
-"PO-Revision-Date: 2016-07-10 18:55+0200\n"
+"POT-Creation-Date: 2017-01-22 19:51+0100\n"
+"PO-Revision-Date: 2017-01-22 19:56+0100\n"
 "Last-Translator: Gilles Dartiguelongue <gilles.dartiguelongue@esiee.org>\n"
 "Language: fr\n"
 "Language-Team: français <>\n"
@@ -16,8 +16,28 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
+"Generated-By: Babel 2.3.4\n"
 "X-Generator: Gtranslator 2.91.7\n"
+
+#: original/gallery.py:154
+msgid "Camera Model"
+msgstr "Appareil"
+
+#: original/gallery.py:155
+msgid "Lens Model"
+msgstr "Objectif"
+
+#: original/gallery.py:156
+msgid "Time of exposure"
+msgstr "Durée d'exposition"
+
+#: original/gallery.py:158
+msgid "F Stop"
+msgstr "Ouverture"
+
+#: original/gallery.py:160
+msgid "Film/Chip Sensitivity"
+msgstr "Sensibilité ISO"
 
 #: original/templates/base.html:24
 msgid "show styles"
@@ -93,48 +113,48 @@ msgstr "Accès refusé"
 msgid "Sorry, this gallery is restricted"
 msgstr "Désolé, cette gallerie est restreinte d'accès"
 
-#: original/templates/gallery_photo.html:61
+#: original/templates/gallery_photo.html:74
 #, python-format
 msgid "This image has been viewed <strong>%(views)s</strong> times."
 msgstr "Cette image a été vu <strong>%(views)s</strong> fois."
 
-#: original/templates/gallery_photo.html:77
+#: original/templates/gallery_photo.html:90
 msgid "Post a Comment"
 msgstr "Envoyer un commentaire"
 
-#: original/templates/gallery_photo.html:81
+#: original/templates/gallery_photo.html:94
 msgid "Show Form"
 msgstr "Montrer le formulaire"
 
-#: original/templates/gallery_photo.html:82
+#: original/templates/gallery_photo.html:95
 msgid "Hide Form"
 msgstr "Cacher le formulaire"
 
-#: original/templates/gallery_photo.html:90
+#: original/templates/gallery_photo.html:103
 msgid "Name:"
 msgstr "Nom :"
 
-#: original/templates/gallery_photo.html:94
+#: original/templates/gallery_photo.html:107
 msgid "Remember Name:"
 msgstr "Se rappeller du nom :"
 
-#: original/templates/gallery_photo.html:103
+#: original/templates/gallery_photo.html:116
 msgid "Retype PIN Above:"
 msgstr "Saisire le code PIN ci-dessus :"
 
-#: original/templates/gallery_photo.html:107
+#: original/templates/gallery_photo.html:120
 msgid "Comment :"
 msgstr "Commentaire :"
 
-#: original/templates/gallery_photo.html:112
+#: original/templates/gallery_photo.html:125
 msgid "Send"
 msgstr "Envoyer"
 
-#: original/templates/gallery_photo.html:130
+#: original/templates/gallery_photo.html:143
 msgid "<span class=\"accesskey\">P</span>revious"
 msgstr "<span class=\"accesskey\">P</span>récédent"
 
-#: original/templates/gallery_photo.html:134
+#: original/templates/gallery_photo.html:147
 msgid "<span class=\"accesskey\">N</span>ext"
 msgstr "<span class=\"accesskey\">S</span>uivant"
 

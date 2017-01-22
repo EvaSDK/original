@@ -12,6 +12,7 @@ except ImportError:
     from urllib.parse import quote as urlquote
 
 from flask import current_app as app
+from flask_babel import gettext as _
 from PIL import Image
 from redis import Redis
 from rq import Queue
@@ -145,6 +146,19 @@ class Photo(object):
         for res in ('lq', 'mq', 'hq'):
             if os.path.exists(self.compute_path(res, True)):
                 info[res] = self.compute_path(res)
+
+        exif = im._getexif()
+        if exif:
+            info['exif'] = {
+                'camera': (_('Camera Model'),
+                           exif.get(0x110, 'Unknown Camera')),
+                'lens': (_('Lens Model'), exif.get(0xa434, 'Unknown Lens')),
+                'exposure_time': (_('Time of exposure'),
+                                  '%d/%d second' % exif[0x829a]),
+                'aperture': (_('F Stop'),
+                             'f/%.1f' % (exif[0x9202][0] / exif[0x9202][1])),
+                'iso': (_('Film/Chip Sensitivity'), '%d' % exif[0x8827]),
+            }
 
         return info
 
