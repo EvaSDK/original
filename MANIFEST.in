@@ -7,3 +7,4 @@ include TODO.rst
 include babel.cfg
 include conf/paste.ini
 include original/translations *.pot *.po
+include tox.ini
