@@ -2,8 +2,6 @@
 
 {% block content %}
 
-<div class="navigation"><a href="./">{% trans %}Photo Gallery Index{% endtrans %}</a></div>
-
 <!-- listing galleries-->
 
 {% for year, year_group in galleries|groupby('date.year')|sort(reverse=True) %}
