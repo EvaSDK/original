@@ -17,7 +17,7 @@ from PIL import Image
 from redis import Redis
 from rq import Queue
 
-from original.tasks import resize_pictures
+from original.tasks import QUALITY_SETTINGS, resize_pictures
 
 
 class Gallery(object):
@@ -35,7 +35,7 @@ class Gallery(object):
             os.path.join(app.config['GALLERY_ROOT'], relative_path, 'thumbs')
         ):
             queue = Queue(connection=Redis.from_url(app.config['REDIS_URL']))
-            queue.enqueue(resize_pictures, self.full_path)
+            queue.enqueue(resize_pictures, self.full_path, 'thumbs')
 
     @property
     def has_credentials(self):

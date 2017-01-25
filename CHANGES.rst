@@ -4,6 +4,7 @@
 * Read EXIF data from pictures.
 * Remove hard-coded links to endpoint serving files using a named endpoint.
 * Move navigation build to base.html and fix URL to site root.
+* Add missing quality argument when triggering resize task through browsing.
 
 1.2.0 (2016-07-10)
 ------------------
