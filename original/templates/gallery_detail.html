@@ -10,11 +10,11 @@
 
   {% if picture.orientation == "portrait" %}
   <a class="portrait" title="Photo {{ loop.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.filename }}">
-    <img height="80" width="53" alt="photo No. {{ loop.index }}" src="../galleries/{{ picture.thumb }}" />
+    <img height="80" width="53" alt="photo No. {{ loop.index }}" src="{{ url_for('media', path=picture.thumb) }}" />
   </a>
   {% else %}
   <a title="Photo {{ loop.index }}, 0 Comments" href="?galerie={{ gallery.folder_name }}&photo={{ picture.filename }}">
-    <img height="53" width="80" alt="photo No. {{ loop.index }}" src="../galleries/{{ picture.thumb }}" />
+    <img height="53" width="80" alt="photo No. {{ loop.index }}" src="{{ url_for('media', path=picture.thumb) }}" />
   </a>
   {% endif %}
 

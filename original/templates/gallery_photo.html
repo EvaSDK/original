@@ -11,7 +11,7 @@
   <a id="minus" href="?galerie={{ gallery.folder_name }}&photo={{ current.filename }}"></a> :
   {% for thumb in thumbs %}
   <a href="?galerie={{ gallery.folder_name }}&photo={{ thumb.filename }}&show_thumbs=yes" title="Photo">
-    <img class="thumb" src="../galleries/{{ thumb.thumb }}" alt="photo No. {{ loop.index }}"
+    <img class="thumb" src="{{ url_for('media', path=thumb.thumb) }}" alt="photo No. {{ loop.index }}"
     {%- if thumb.orientation == "portrait" %}
     width="13" height="20"
     {% else %}
@@ -24,15 +24,15 @@
 </div>
 
 <div id="image" style="height: {{ current.height + 10 }}px">
-  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="../galleries/{{ current.lq }}" />
+  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="{{ url_for('media', path=current.lq) }}" />
 
   {% if prev %}
   <div class="prevthumb">
     <a href="?galerie={{ gallery.folder_name }}&photo={{ prev.filename }}">
       {% if prev.orientation == "portrait" %}
-      <img height="80" width="53" src="../galleries/{{ prev.thumb }}" alt="Previous"/>
+      <img height="80" width="53" src="{{ url_for('media', path=prev.thumb) }}" alt="Previous"/>
       {% else %}
-      <img height="53" width="80" src="../galleries/{{ prev.thumb }}" alt="Previous"/>
+      <img height="53" width="80" src="{{ url_for('media', path=prev.thumb) }}" alt="Previous"/>
       {% endif %}
       <br />
       Previous
@@ -44,9 +44,9 @@
   <div class="nextthumb">
     <a href="?galerie={{ gallery.folder_name }}&photo={{ next.filename }}">
       {% if next.orientation == "portrait" %}
-      <img height="80" width="53" src="../galleries/{{ next.thumb }}" alt="Next"/>
+      <img height="80" width="53" src="{{ url_for('media', path=next.thumb) }}" alt="Next"/>
       {% else %}
-      <img height="53" width="80" src="../galleries/{{ next.thumb }}" alt="Next"/>
+      <img height="53" width="80" src="{{ url_for('media', path=next.thumb) }}" alt="Next"/>
       {% endif %}
       <br />
       Next
@@ -77,10 +77,10 @@
   {% if current.mq or current.hq %}
   <div id="mqhq">
     {% if current.mq %}
-    <a href="../galleries/{{ current.mq }}">MQ</a>
+    <a href="{{ url_for('media', path=current.mq) }}">MQ</a>
     {% endif %}
     {% if current.hq %}
-    <a href="../galleries/{{ current.hq }}">HQ</a>
+    <a href="{{ url_for('media', path=current.hq) }}">HQ</a>
     {% endif %}
   </div>
   {% endif %}

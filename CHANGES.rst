@@ -2,6 +2,7 @@
 ------------------
 
 * Read EXIF data from pictures.
+* Remove hard-coded links to endpoint serving files using a named endpoint.
 
 1.2.0 (2016-07-10)
 ------------------
