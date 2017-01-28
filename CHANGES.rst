@@ -7,6 +7,7 @@
 * Add missing quality argument when triggering resize task through browsing.
 * Split view in gallery listing view and gallery detail view to allow easier
   templating or URLS.
+* Use Flask-WTF to deal with comment form.
 
 1.2.0 (2016-07-10)
 ------------------

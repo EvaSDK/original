@@ -14,6 +14,8 @@ from flask_classy import FlaskView
 
 from original.gallery import Gallery, Photo
 
+from ..forms import CommentForm
+
 LOG = logging.getLogger(__name__)
 
 
@@ -87,10 +89,8 @@ class GalleryDetailView(FlaskView):
             'gallery': gallery.get_info(),
             'current': current.get_info(),
             'comments': current.get_comments(),
-            'antispam': {
-                'code': code,
-                'checksum': code_checksum,
-            },
+            'commentspamcode': code,
+            'form': CommentForm(commentspamchecksum=code_checksum),
         }
 
         if index > 1:
@@ -116,10 +116,8 @@ class GalleryDetailView(FlaskView):
             return render_template('picture_404.html',
                                    gallery=gallery.get_info()), 404
 
-        code = request.form['commentspamcheck'].strip()
-        code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
-
-        if code_checksum != request.form['commentkolacek']:
+        form = CommentForm()
+        if not form.validate_on_submit():
             return render_template('comment_failure.html')
 
         current.append_comment(
@@ -128,8 +126,8 @@ class GalleryDetailView(FlaskView):
 <div class="commentdata">{commentdata}</div>
 </div>"""
             .format(
-                commentname=request.form['commentname'],
-                commentdata=request.form['commentdata']
+                commentname=request.form['username'],
+                commentdata=request.form['comment']
             ))
 
         return self.get(gallery.relative_path, photo)

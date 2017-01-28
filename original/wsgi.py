@@ -9,4 +9,5 @@ application = app
 
 
 if __name__ == '__main__':
+    app.config['SECRET_KEY'] = 'N/A'
     app.run(debug=True)

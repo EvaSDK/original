@@ -96,26 +96,23 @@
 
     <div id="comment_form" style="display: none;">
       <form action="" method="post">
+        {{ form.hidden_tag() }}
         <div class="row">
-          <div class="label"><a title="Enter your name." href="#">{% trans %}Name:{% endtrans %}</a></div>
-          <div class="control"><input size="30" name="commentname" value="" type="text" /></div>
+          <div class="label"><a title="Enter your name." href="#">{{ form.username.label }}</a></div>
+          <div class="control">{{ form.username(size=30) }}</div>
         </div>
         <div class="row">
-          <div class="label"><a title="Should the browser remember your name?" href="#">{% trans %}Remember Name:{% endtrans %}</a></div>
-          <div class="control"><input name="savecommentname" value="1" checked="checked" type="checkbox" /></div>
+          <div class="label"><a title="Should the browser remember your name?" href="#">{{ form.remember.label }}</a></div>
+          <div class="control">{{ form.remember() }}</div>
         </div>
-        <div class="row"><div class="control">{{ antispam.code }}</div></div>
+        <div class="row"><div class="control">{{ commentspamcode }}</div></div>
         <div class="row">
-          <div class="label"></div>
-          <div class="control"><input name="commentkolacek" value="{{ antispam.checksum }}" type="hidden" /></div>
-        </div>
-        <div class="row">
-          <div class="label"><a title="Enter the number shown above." href="#">{% trans %}Retype PIN Above:{% endtrans %}</a></div>
-          <div class="control"><input size="30" name="commentspamcheck" value="" type="text" /></div>
+          <div class="label"><a title="Enter the number shown above." href="#">{{ form.commentspamcheck.label }}</a></div>
+          <div class="control">{{ form.commentspamcheck(size=30) }}</div>
         </div>
         <div class="row">
-          <div class="label"><a title="Allowed HTML tags: a,b,i,ul,li,blockquote,br." href="#">{% trans %}Comment :{% endtrans %}</a></div>
-          <div class="control"><textarea name="commentdata" cols="40" rows="10"></textarea></div>
+          <div class="label"><a title="Allowed HTML tags: a,b,i,ul,li,blockquote,br." href="#">{{ form.comment.label }}</a></div>
+          <div class="control">{{ form.comment(cols=40, rows=10) }}</div>
         </div>
         <div class="row">
           <div class="label"></div>

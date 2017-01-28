@@ -48,6 +48,7 @@ setup(
         'flask',
         'flask-babel',
         'flask-classy',
+        'flask-wtf',
         'pastedeploy',
         'pillow',
         'rq',
