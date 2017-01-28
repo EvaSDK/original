@@ -9,7 +9,7 @@ import io
 import os
 import unittest
 
-from original.app import create_app
+from original.app import create_app, app_factory
 
 
 class TestApp(unittest.TestCase):
@@ -36,3 +36,22 @@ class TestApp(unittest.TestCase):
 
         res = self.client.get('/media/test.txt')
         self.assertEqual(200, res.status_code)
+
+
+class TestAppFactory(unittest.TestCase):
+
+    def test_no_config(self):
+        app = app_factory({})
+        self.assertFalse(app.config['DEBUG'])
+        self.assertIn('GALLERY_ROOT', app.config)
+        self.assertIn('REDIS_URL', app.config)
+
+    def test_config_debug(self):
+        app = app_factory({}, debug='1')
+        self.assertTrue(app.config['DEBUG'])
+
+        app = app_factory({}, DEBUG='n')
+        self.assertFalse(app.config['DEBUG'])
+
+        app = app_factory({}, DEbUg='y')
+        self.assertTrue(app.config['DEBUG'])
