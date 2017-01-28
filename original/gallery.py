@@ -6,11 +6,6 @@ import glob
 import io
 import os
 
-try:
-    from urllib import quote as urlquote
-except ImportError:
-    from urllib.parse import quote as urlquote
-
 from flask import current_app as app
 from flask_babel import gettext as _
 from PIL import Image
@@ -77,7 +72,7 @@ class Gallery(object):
                          for line in info_fd.readlines()])
             info['date'] = datetime.datetime.strptime(info['date'].strip(),
                                                       '%Y-%m-%d').date()
-            info['folder_name'] = urlquote(info.pop('folder-name'))
+            info['folder_name'] = info.pop('folder-name')
 
         return info
 
