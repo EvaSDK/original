@@ -5,6 +5,8 @@
 * Remove hard-coded links to endpoint serving files using a named endpoint.
 * Move navigation build to base.html and fix URL to site root.
 * Add missing quality argument when triggering resize task through browsing.
+* Split view in gallery listing view and gallery detail view to allow easier
+  templating or URLS.
 
 1.2.0 (2016-07-10)
 ------------------

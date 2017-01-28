@@ -34,14 +34,14 @@
       </div>
     </div>
 
-    <h1 class="title"><a href="{{ url_for('GalleryView:index') }}">{% trans %}Photo Gallery{% endtrans %}<span /></a></h1>
+    <h1 class="title"><a href="{{ url_for('GalleryListView:index') }}">{% trans %}Photo Gallery{% endtrans %}<span /></a></h1>
 
     {% block navigation %}
     <div class="navigation">
-      <a href="{{ url_for('GalleryView:index') }}">{% trans %}Photo Gallery Index{% endtrans %}</a>
+      <a href="{{ url_for('GalleryListView:index') }}">{% trans %}Photo Gallery Index{% endtrans %}</a>
       {% if gallery %}
       {% if current %}
-      &gt; <a href="?galerie={{ gallery.folder_name }}">{{ gallery.name }}</a>
+      &gt; <a href="{{ url_for('GalleryDetailView:index', gallery=gallery.folder_name) }}">{{ gallery.name }}</a>
       &gt; Photo {{ current.index }}
       {% else %}
       &gt; {{ gallery.name }}

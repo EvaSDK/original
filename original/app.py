@@ -8,7 +8,10 @@ from flask import Flask
 from flask_babel import Babel, format_date, format_datetime
 
 from original.views import get_locale, send_pic
-from original.views.gallery import GalleryView
+from original.views.gallery import (
+    GalleryDetailView,
+    GalleryListView,
+)
 
 
 def create_app(config=None):
@@ -39,7 +42,8 @@ def create_app(config=None):
     app.jinja_env.filters['date'] = format_date
     app.jinja_env.filters['datetime'] = format_datetime
 
-    GalleryView.register(app)
+    GalleryListView.register(app)
+    GalleryDetailView.register(app)
     return app
 
 

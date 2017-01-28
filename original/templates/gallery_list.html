@@ -16,12 +16,12 @@
     <p>
     {% endif %}
     {% trans
-         folder=pellicule.folder_name,
+         gallery=url_for('GalleryDetailView:index', gallery=pellicule.folder_name),
          name=pellicule.name,
          author=pellicule.author,
          date=pellicule.date|dateformat
       -%}
-      <a href='?galerie={{ folder }}'>{{ name }}</a>
+      <a href="{{ gallery }}">{{ name }}</a>
       <span class="author">by {{ author }}</span>
       <span class="date">{{ date }}</span>
     {%- endtrans %}
