@@ -120,14 +120,6 @@ class GalleryDetailView(FlaskView):
         if not form.validate_on_submit():
             return render_template('comment_failure.html')
 
-        current.append_comment(
-            u"""<div class="commententry">
-<div class="name">Comment from <em>{commentname}</em></div>
-<div class="commentdata">{commentdata}</div>
-</div>"""
-            .format(
-                commentname=request.form['username'],
-                commentdata=request.form['comment']
-            ))
+        current.append_comment(render_template('comment.html', form=form))
 
         return self.get(gallery.relative_path, photo)

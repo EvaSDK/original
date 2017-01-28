@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-01-28 20:34+0100\n"
-"PO-Revision-Date: 2017-01-28 20:35+0100\n"
+"POT-Creation-Date: 2017-01-28 21:12+0100\n"
+"PO-Revision-Date: 2017-01-28 21:12+0100\n"
 "Last-Translator: Gilles Dartiguelongue <gilles.dartiguelongue@esiee.org>\n"
 "Language: fr\n"
 "Language-Team: français <>\n"
@@ -82,6 +82,11 @@ msgid ""
 msgstr ""
 "généré par <em><a href=\"http://jimmac.musichall.cz/original."
 "php3\">Original</a> ver. 0.12pre</em>"
+
+#: original/templates/comment.html:2
+#, python-format
+msgid "Comment from <em>%(user)s</em>"
+msgstr "Commentaire de <em>%(user)s</em>"
 
 #: original/templates/comment_failure.html:6
 msgid "No comment spam"

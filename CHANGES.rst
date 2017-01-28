@@ -8,6 +8,7 @@
 * Split view in gallery listing view and gallery detail view to allow easier
   templating or URLS.
 * Use Flask-WTF to deal with comment form.
+* Generate comment HTML content from template.
 
 1.2.0 (2016-07-10)
 ------------------
