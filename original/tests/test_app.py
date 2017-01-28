@@ -5,6 +5,8 @@ try:
 except ImportError:
     from backports.tempfile import TemporaryDirectory
 
+import io
+import os
 import unittest
 
 from original.app import create_app
@@ -26,8 +28,11 @@ class TestApp(unittest.TestCase):
 
     def test_home(self):
         res = self.client.get('/')
-        self.assertEqual(404, res.status_code)
+        self.assertEqual(200, res.status_code)
 
-    def test_gallery(self):
-        res = self.client.get('/gallery/')
+    def test_media(self):
+        with io.open(os.path.join(self.gallery.name, 'test.txt'), 'w') as fd:
+            fd.write(u'fakecontent')
+
+        res = self.client.get('/media/test.txt')
         self.assertEqual(200, res.status_code)
