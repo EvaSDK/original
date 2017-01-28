@@ -3,5 +3,6 @@
 *.py[co]
 *~
 .coverage
+.tox
 /dist
 /venv*
