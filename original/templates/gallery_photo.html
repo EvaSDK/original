@@ -105,7 +105,7 @@
           <div class="label"><a title="Should the browser remember your name?" href="#">{{ form.remember.label }}</a></div>
           <div class="control">{{ form.remember() }}</div>
         </div>
-        <div class="row"><div class="control">{{ commentspamcode }}</div></div>
+        <div class="row"><div class="control">{{ form.commentspamchecksum.object_data }}</div></div>
         <div class="row">
           <div class="label"><a title="Enter the number shown above." href="#">{{ form.commentspamcheck.label }}</a></div>
           <div class="control">{{ form.commentspamcheck(size=30) }}</div>

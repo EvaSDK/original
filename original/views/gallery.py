@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import hashlib
 import logging
-import random
 
 try:
     from urllib import unquote as urlunquote
@@ -80,17 +78,12 @@ class GalleryDetailView(FlaskView):
             return render_template('picture_404.html',
                                    gallery=gallery.get_info()), 404
 
-        # TODO: CommentForm
-        code = u'{:04d}'.format(random.randint(0, 9999))
-        code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
-
         context = {
             'index': index + 1,
             'gallery': gallery.get_info(),
             'current': current.get_info(),
             'comments': current.get_comments(),
-            'commentspamcode': code,
-            'form': CommentForm(commentspamchecksum=code_checksum),
+            'form': CommentForm(),
         }
 
         if index > 1:
