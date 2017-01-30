@@ -9,6 +9,7 @@
   templating or URLS.
 * Use Flask-WTF to deal with comment form.
 * Generate comment HTML content from template.
+* Extend random number generation to 0-9999 instead of 1000-9999.
 
 1.2.0 (2016-07-10)
 ------------------

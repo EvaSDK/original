@@ -81,7 +81,7 @@ class GalleryDetailView(FlaskView):
                                    gallery=gallery.get_info()), 404
 
         # TODO: CommentForm
-        code = u'{}'.format(random.randint(1000, 9999))
+        code = u'{:04d}'.format(random.randint(0, 9999))
         code_checksum = hashlib.md5(code.encode('utf-8')).hexdigest()
 
         context = {
