@@ -60,8 +60,6 @@ class Gallery(object):
             except ValueError:
                 pass
 
-        raise StopIteration
-
     def get_info(self):
         """Read info file."""
         with io.open(
@@ -99,8 +97,6 @@ class Photo(object):
         """List all photos of `gallery`."""
         for path in glob.iglob(os.path.join(gallery.full_path, 'hq', '*.jpg')):
             yield cls(gallery, os.path.basename(path))
-
-        raise StopIteration
 
     def compute_path(self, size, absolute=False):
         """Compute path to image variants."""
