@@ -7,7 +7,7 @@
   {% if thumbs %}
   <a id="minus" href="{{ url_for('GalleryDetailView:get', gallery=gallery.folder_name, photo=current.filename) }}"></a> :
   {% for thumb in thumbs %}
-  <a href="{{ url_for('GalleryDetailView:get', gallery=gallery.folder_name, photo=current.filename) }}?show_thumbs=yes" title="Photo">
+  <a href="{{ url_for('GalleryDetailView:get', gallery=gallery.folder_name, photo=thumb.filename) }}?show_thumbs=yes" title="Photo">
     <img class="thumb" src="{{ url_for('media', path=thumb.thumb) }}" alt="photo No. {{ loop.index }}"
     {%- if thumb.orientation == "portrait" %}
     width="13" height="20"
