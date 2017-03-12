@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: original 1.3.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-13 00:23+0100\n"
+"POT-Creation-Date: 2017-03-13 00:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -129,11 +129,13 @@ msgstr ""
 
 #: original/templates/gallery_photo.html:30
 #: original/templates/gallery_photo.html:32
+#: original/templates/gallery_photo.html:35
 msgid "Previous"
 msgstr ""
 
 #: original/templates/gallery_photo.html:44
 #: original/templates/gallery_photo.html:46
+#: original/templates/gallery_photo.html:49
 msgid "Next"
 msgstr ""
 

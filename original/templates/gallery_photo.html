@@ -32,7 +32,7 @@
       <img height="53" width="80" src="{{ url_for('media', path=prev.thumb) }}" alt="{% trans %}Previous{% endtrans %}"/>
       {% endif %}
       <br />
-      Previous
+      {% trans %}Previous{% endtrans %}
     </a>
   </div>
   {% endif %}
@@ -46,7 +46,7 @@
       <img height="53" width="80" src="{{ url_for('media', path=next.thumb) }}" alt="{% trans %}Next{% endtrans %}"/>
       {% endif %}
       <br />
-      Next
+      {% trans %}Next{% endtrans %}
     </a>
   </div>
   {% endif %}

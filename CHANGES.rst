@@ -1,7 +1,7 @@
 1.3.1 (unreleased)
 ------------------
 
-* No entry.
+* Add forgotten labels to translations.
 
 1.3.0 (2017-03-13)
 ------------------

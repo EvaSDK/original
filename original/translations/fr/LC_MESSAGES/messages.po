@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-13 00:21+0100\n"
-"PO-Revision-Date: 2017-03-13 00:25+0100\n"
+"POT-Creation-Date: 2017-03-13 00:48+0100\n"
+"PO-Revision-Date: 2017-03-13 00:49+0100\n"
 "Last-Translator: Gilles Dartiguelongue <gilles.dartiguelongue@esiee.org>\n"
 "Language: fr\n"
 "Language-Team: français <>\n"
@@ -135,11 +135,13 @@ msgstr "Désolé, cette gallerie est restreinte d'accès"
 
 #: original/templates/gallery_photo.html:30
 #: original/templates/gallery_photo.html:32
+#: original/templates/gallery_photo.html:35
 msgid "Previous"
 msgstr "Précédent"
 
 #: original/templates/gallery_photo.html:44
 #: original/templates/gallery_photo.html:46
+#: original/templates/gallery_photo.html:49
 msgid "Next"
 msgstr "Suivant"
 
