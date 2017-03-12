@@ -27,9 +27,9 @@
   <div class="prevthumb">
     <a href="{{ url_for('GalleryDetailView:get', gallery=gallery.folder_name, photo=prev.filename) }}">
       {% if prev.orientation == "portrait" %}
-      <img height="80" width="53" src="{{ url_for('media', path=prev.thumb) }}" alt="Previous"/>
+      <img height="80" width="53" src="{{ url_for('media', path=prev.thumb) }}" alt="{% trans %}Previous{% endtrans %}"/>
       {% else %}
-      <img height="53" width="80" src="{{ url_for('media', path=prev.thumb) }}" alt="Previous"/>
+      <img height="53" width="80" src="{{ url_for('media', path=prev.thumb) }}" alt="{% trans %}Previous{% endtrans %}"/>
       {% endif %}
       <br />
       Previous
@@ -41,9 +41,9 @@
   <div class="nextthumb">
     <a href="{{ url_for('GalleryDetailView:get', gallery=gallery.folder_name, photo=next.filename) }}">
       {% if next.orientation == "portrait" %}
-      <img height="80" width="53" src="{{ url_for('media', path=next.thumb) }}" alt="Next"/>
+      <img height="80" width="53" src="{{ url_for('media', path=next.thumb) }}" alt="{% trans %}Next{% endtrans %}"/>
       {% else %}
-      <img height="53" width="80" src="{{ url_for('media', path=next.thumb) }}" alt="Next"/>
+      <img height="53" width="80" src="{{ url_for('media', path=next.thumb) }}" alt="{% trans %}Next{% endtrans %}"/>
       {% endif %}
       <br />
       Next
