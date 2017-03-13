@@ -8,7 +8,7 @@ except ImportError:
     from urllib.parse import unquote as urlunquote
 
 from flask import render_template, request
-from flask_classy import FlaskView
+from flask_classful import FlaskView
 
 from original.gallery import Gallery, Photo
 

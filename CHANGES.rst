@@ -1,7 +1,7 @@
 1.3.2 (unreleased)
 ------------------
 
-* No entry.
+* Switch to flask-classful.
 
 1.3.1 (2017-03-13)
 ------------------

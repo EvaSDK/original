@@ -47,7 +47,7 @@ setup(
     install_requires=[
         'flask',
         'flask-babel',
-        'flask-classy',
+        'flask-classful',
         'flask-wtf',
         'pastedeploy',
         'pillow',
