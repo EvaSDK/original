@@ -57,6 +57,7 @@ def resize_picture(gallery_path, path, quality):
     new = new.rotate(angle)
 
     new.save(os.path.join(gallery_path, quality, os.path.basename(path)))
+    return path
 
 
 def resize_pictures(gallery_path, quality, connection=None):
@@ -67,5 +68,8 @@ def resize_pictures(gallery_path, quality, connection=None):
     os.makedirs(os.path.join(gallery_path, quality))
 
     queue = Queue(connection=connection)
-    for photo_path in glob.glob(os.path.join(gallery_path, 'hq', '*.jpg')):
+    return [
         queue.enqueue(resize_picture, gallery_path, photo_path, quality)
+        for photo_path in glob.glob(os.path.join(gallery_path, 'hq', '*.jpg'))
+    ]
+

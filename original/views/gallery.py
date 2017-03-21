@@ -2,17 +2,18 @@
 
 import logging
 
-try:
-    from urllib import unquote as urlunquote
-except ImportError:
-    from urllib.parse import unquote as urlunquote
-
 from flask import render_template, request
 from flask_classful import FlaskView
 
 from original.gallery import Gallery, Photo
 
 from ..forms import CommentForm
+
+try:
+    from urllib import unquote as urlunquote
+except ImportError:
+    from urllib.parse import unquote as urlunquote
+
 
 LOG = logging.getLogger(__name__)
 

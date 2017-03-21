@@ -21,7 +21,7 @@
 </div>
 
 <div id="image" style="height: {{ current.height + 10 }}px">
-  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="{{ url_for('media', path=current.lq) }}" />
+  <img id="preview" height="{{ current.height }}" width="{{ current.width }}" alt="" src="{{ url_for('media', path=current.hq) }}" />
 
   {% if prev %}
   <div class="prevthumb">

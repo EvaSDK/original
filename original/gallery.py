@@ -5,6 +5,7 @@ import datetime
 import glob
 import io
 import os
+import time
 
 from flask import current_app as app
 from flask_babel import gettext as _
@@ -29,8 +30,14 @@ class Gallery(object):
         if not os.path.exists(
             os.path.join(app.config['GALLERY_ROOT'], relative_path, 'thumbs')
         ):
-            queue = Queue(connection=Redis.from_url(app.config['REDIS_URL']))
-            queue.enqueue(resize_pictures, self.full_path, 'thumbs')
+            print('Scheduling jobs')
+            self.jobs = resize_pictures(
+                self.full_path,
+                'thumbs',
+                connection=Redis.from_url(app.config['REDIS_URL'])
+            )
+        else:
+            self.jobs = []
 
     @property
     def has_credentials(self):
@@ -95,8 +102,20 @@ class Photo(object):
     @classmethod
     def all(cls, gallery):
         """List all photos of `gallery`."""
-        for path in glob.iglob(os.path.join(gallery.full_path, 'hq', '*.jpg')):
-            yield cls(gallery, os.path.basename(path))
+        if gallery.jobs:
+            while gallery.jobs:
+                for job in gallery.jobs:
+                    if job.is_failed:
+                        raise
+                    elif job.is_finished:
+                        yield cls(gallery, os.path.basename(job.result))
+                        gallery.jobs.remove(job)
+
+                time.sleep(0.3)
+        else:
+            for path in glob.iglob(os.path.join(gallery.full_path, 'hq',
+                                                '*.jpg')):
+                yield cls(gallery, os.path.basename(path))
 
     def compute_path(self, size, absolute=False):
         """Compute path to image variants."""
@@ -114,25 +133,31 @@ class Photo(object):
             'filename': self.filename,
         }
 
-        path = self.compute_path('lq', True)
-        if os.path.exists(path):
-            im = Image.open(path)
-            info.update({
-                'height': im.size[1],
-                'width': im.size[0],
-            })
-        else:
-            path = self.compute_path('hq', True)
-            im = Image.open(path)
-            info.update({
-                'height': im.size[1],
-                'width': im.size[0],
-            })
+        path = self.compute_path('hq', True)
+        if not os.path.exists(path):
+            path = self.compute_path('lq', True)
+
+        im = Image.open(path)
 
         if im.size[0] > im.size[1]:
+            width, height = QUALITY_SETTINGS['lq'][0]
             info['orientation'] = 'landscape'
         else:
+            height, width = QUALITY_SETTINGS['lq'][0]
             info['orientation'] = 'portrait'
+
+        src_ratio = im.width / im.height
+        new_ratio = width / height
+
+        if src_ratio < new_ratio:
+            size = (int(height * src_ratio), height)
+        else:
+            size = (width, int(width / src_ratio))
+
+        info.update({
+            'height': size[1],
+            'width': size[0],
+        })
 
         for res in ('lq', 'mq', 'hq'):
             if os.path.exists(self.compute_path(res, True)):

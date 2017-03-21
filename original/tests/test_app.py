@@ -9,7 +9,7 @@ import io
 import os
 import unittest
 
-from original.app import create_app, app_factory
+from original.app import app_factory, create_app
 
 
 class TestApp(unittest.TestCase):

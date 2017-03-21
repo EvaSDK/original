@@ -11,10 +11,7 @@ from flask_babel import Babel, format_date, format_datetime
 
 import original
 from original.views import get_locale, send_pic
-from original.views.gallery import (
-    GalleryDetailView,
-    GalleryListView,
-)
+from original.views.gallery import GalleryDetailView, GalleryListView
 
 
 def create_app(config=None):
