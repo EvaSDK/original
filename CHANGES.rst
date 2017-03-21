@@ -2,6 +2,7 @@
 ------------------
 
 * Switch to flask-classful.
+* Fix antispam code generation, closes #3.
 
 1.3.1 (2017-03-13)
 ------------------

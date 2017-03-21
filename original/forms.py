@@ -43,7 +43,7 @@ class CommentForm(FlaskForm):
     remember = BooleanField(_('Remember Name:'))
 
     commentspamchecksum = HiddenField(
-        default=u'{:04d}'.format(random.randint(0, 9999)),
+        default=lambda : u'{:04d}'.format(random.randint(0, 9999)),
         filters=[filter_antispam_code],
     )
     commentspamcheck = StringField(_('Retype PIN Above:'))
