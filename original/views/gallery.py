@@ -58,6 +58,9 @@ class GalleryDetailView(FlaskView):
 
     def index(self, gallery):
         gallery = self._get_gallery(gallery)
+        if not isinstance(gallery, Gallery):
+            return gallery
+
         pictures = sorted(list(gallery.photos), key=lambda pic: pic.filename)
 
         return render_template('gallery_detail.html', **{
@@ -67,6 +70,9 @@ class GalleryDetailView(FlaskView):
 
     def get(self, gallery, photo):
         gallery = self._get_gallery(gallery)
+        if not isinstance(gallery, Gallery):
+            return gallery
+
         pictures = sorted(list(gallery.photos), key=lambda pic: pic.filename)
 
         current = None
@@ -103,6 +109,9 @@ class GalleryDetailView(FlaskView):
 
     def post(self, gallery, photo):
         gallery = self._get_gallery(gallery)
+        if not isinstance(gallery, Gallery):
+            return gallery
+
         try:
             current = Photo(gallery, photo)
         except ValueError:

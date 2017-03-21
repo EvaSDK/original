@@ -4,6 +4,7 @@
 * Switch to flask-classful.
 * Fix antispam code generation, closes #3.
 * Move antispam code logic to a custom Field.
+* Fix rendering of locked galleries, closes #2.
 
 1.3.1 (2017-03-13)
 ------------------
