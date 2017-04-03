@@ -1,7 +1,7 @@
 1.3.3 (unreleased)
 ------------------
 
-* No entry.
+* Fix logic to previous photo.
 
 1.3.2 (2017-03-21)
 ------------------

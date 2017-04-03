@@ -92,7 +92,7 @@ class GalleryDetailView(FlaskView):
             'form': CommentForm(),
         }
 
-        if index > 1:
+        if index > 0:
             context['prev'] = pictures[index - 1].get_info()
 
         try:
