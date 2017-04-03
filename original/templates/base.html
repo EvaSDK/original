@@ -42,7 +42,7 @@
       {% if gallery %}
       {% if current %}
       &gt; <a href="{{ url_for('GalleryDetailView:index', gallery=gallery.folder_name) }}">{{ gallery.name }}</a>
-      &gt; Photo {{ current.index }}
+      &gt; Photo {{ index }}
       {% else %}
       &gt; {{ gallery.name }}
       {% endif %}

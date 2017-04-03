@@ -2,6 +2,7 @@
 ------------------
 
 * Fix logic to previous photo.
+* Fix missing photo number in template.
 
 1.3.2 (2017-03-21)
 ------------------
