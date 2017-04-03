@@ -3,6 +3,7 @@
 
 * Fix logic to previous photo.
 * Fix missing photo number in template.
+* Fix incorrect argument being used to connect to Redis.
 
 1.3.2 (2017-03-21)
 ------------------

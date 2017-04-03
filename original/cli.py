@@ -19,7 +19,7 @@ def do_thumbnails():
 
     args = parser.parse_args()
 
-    queue = Queue(connection=Redis.from_url(args.redis))
+    queue = Queue(connection=Redis.from_url(args.redis_url))
     gallery_root = os.path.abspath(args.path)
     queue.enqueue(resize_pictures, gallery_root, 'thumbs')
     queue.enqueue(resize_pictures, gallery_root, 'lq')
