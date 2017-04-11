@@ -1,9 +1,10 @@
-1.3.3 (unreleased)
+1.4.0 (unreleased)
 ------------------
 
 * Fix logic to previous photo.
 * Fix missing photo number in template.
 * Fix incorrect argument being used to connect to Redis.
+* Drop requirement for folder-name in info.txt.
 
 1.3.2 (2017-03-21)
 ------------------

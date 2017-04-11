@@ -70,8 +70,10 @@ class Gallery(object):
                          for line in info_fd.readlines()])
             info['date'] = datetime.datetime.strptime(info['date'].strip(),
                                                       '%Y-%m-%d').date()
-            info['folder_name'] = info.pop('folder-name')
 
+        # Drop folder-name if migration script was not run
+        info.pop('folder-name', None)
+        info['folder_name'] = self.relative_path
         return info
 
     @property
