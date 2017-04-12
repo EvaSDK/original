@@ -140,19 +140,14 @@ class Photo(object):
         }
 
         path = self.compute_path('lq', True)
-        if os.path.exists(path):
-            im = Image.open(path)
-            info.update({
-                'height': im.size[1],
-                'width': im.size[0],
-            })
-        else:
+        if not os.path.exists(path):
             path = self.compute_path('hq', True)
-            im = Image.open(path)
-            info.update({
-                'height': im.size[1],
-                'width': im.size[0],
-            })
+
+        im = Image.open(path)
+        info.update({
+            'height': size[1],
+            'width': size[0],
+        })
 
         if im.size[0] > im.size[1]:
             info['orientation'] = 'landscape'
