@@ -5,14 +5,17 @@ import datetime
 import glob
 import io
 import os
+import time
 
 from flask import current_app as app
 from flask_babel import gettext as _
 from PIL import Image
 from redis import Redis
 from rq import Queue
+from rq.exceptions import NoSuchJobError
+from rq.job import Job
 
-from original.tasks import QUALITY_SETTINGS, resize_pictures
+from original.tasks import QUALITY_SETTINGS, resize_picture, resize_pictures
 
 
 class Gallery(object):
@@ -89,10 +92,30 @@ class Photo(object):
         self.gallery = gallery
         self.filename = filename
 
+        if not os.path.exists(self.compute_path('hq', True)):
+            raise ValueError(
+                'Photo "{}" of gallery "{}" does not exist'
+                .format(self.filename, self.gallery.relative_path)
+            )
+
         if not os.path.exists(self.compute_path('thumbs', True)):
-            raise ValueError("Photo {} of gallery '{}' does not exist"
-                             .format(self.filename,
-                                     self.gallery.relative_path))
+            path_hq = self.compute_path('hq', True)
+            conn = Redis.from_url(app.config['REDIS_URL'])
+            try:
+                job = Job.fetch(id=path_hq, connection=conn)
+            except NoSuchJobError:
+                queue = Queue(connection=conn)
+                job = queue.enqueue(resize_picture, self.gallery.full_path,
+                                    path_hq, 'thumbs', job_id=path_hq, ttl=30)
+
+            while not (job.is_finished or job.is_failed):
+                time.sleep(0.1)
+
+            if job.is_failed:
+                raise ValueError(
+                    'Thumbnail of photo "{}" of gallery "{}" does not exist'
+                    .format(self.filename, self.gallery.relative_path)
+                )
 
     @classmethod
     def all(cls, gallery):

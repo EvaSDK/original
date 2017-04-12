@@ -5,6 +5,9 @@
 * Fix missing photo number in template.
 * Fix incorrect argument being used to connect to Redis.
 * Drop requirement for folder-name in info.txt.
+* Generate and block listing of photos until thumbnails are available.
+  The generation job times out after 30 seconds in queue. It is
+  assumed that it should complete in well under that time.
 
 1.3.2 (2017-03-21)
 ------------------

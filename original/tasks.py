@@ -68,4 +68,5 @@ def resize_pictures(gallery_path, quality, connection=None):
 
     queue = Queue(connection=connection)
     for photo_path in glob.glob(os.path.join(gallery_path, 'hq', '*.jpg')):
-        queue.enqueue(resize_picture, gallery_path, photo_path, quality)
+        queue.enqueue(resize_picture, gallery_path, photo_path, quality,
+                      job_id=photo_path, ttl=30)
