@@ -56,7 +56,7 @@ class Gallery(object):
         """List galleries."""
         for dirname in os.listdir(app.config['GALLERY_ROOT']):
             try:
-                yield cls(os.path.join(app.config['GALLERY_ROOT'], dirname))
+                yield cls(dirname)
             except ValueError:
                 pass
 
