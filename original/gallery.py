@@ -24,7 +24,7 @@ class Gallery(object):
         info_txt = os.path.join(app.config['GALLERY_ROOT'], relative_path,
                                 'info.txt')
         if not os.path.exists(info_txt):
-            raise ValueError("'{}' is not a valid gallery"
+            raise ValueError('"{}" is not a valid gallery'
                              .format(relative_path))
 
         self.relative_path = relative_path

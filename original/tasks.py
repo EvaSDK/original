@@ -27,9 +27,9 @@ def resize_picture(gallery_path, path, quality):
     info.txt.
     """
     if quality not in QUALITY_SETTINGS:
-        raise ValueError('Quality %s is not a valid setting' % quality)
+        raise ValueError('Quality "%s" is not a valid setting' % quality)
 
-    LOG.debug('Generating %s quality picture for %s', quality, path)
+    LOG.debug('Generating "%s" quality picture for "%s"', quality, path)
     ImageFile.LOAD_TRUNCATED_IMAGES = True
     src = Image.open(path)
 
@@ -62,7 +62,7 @@ def resize_picture(gallery_path, path, quality):
 def resize_pictures(gallery_path, quality, connection=None):
     """Generate thumbnails for `gallery_path`."""
     if quality not in QUALITY_SETTINGS:
-        raise ValueError('Quality %s is not a valid setting' % quality)
+        raise ValueError('Quality "%s" is not a valid setting' % quality)
 
     os.makedirs(os.path.join(gallery_path, quality))
 
