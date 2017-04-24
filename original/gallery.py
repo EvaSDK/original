@@ -145,8 +145,8 @@ class Photo(object):
 
         im = Image.open(path)
         info.update({
-            'height': size[1],
-            'width': size[0],
+            'height': im.size[1],
+            'width': im.size[0],
         })
 
         if im.size[0] > im.size[1]:
