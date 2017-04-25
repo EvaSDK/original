@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<!-- listing galleries-->
+<!-- listing galleries -->
 
 {% for year, year_group in galleries|groupby('date.year')|sort(reverse=True) %}
 <div class="year"><h3>{{ year }}</h3>
